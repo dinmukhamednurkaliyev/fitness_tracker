@@ -1,115 +1,166 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
+# =========================================================
+# DART & FLUTTER
+# =========================================================
+**/.dart_tool/
+**/.pub/
+**/.pub-cache/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/build/
+**/.packages.generated
+**/doc/api/
+**/flutter_*.png
+**/linked_*.ds
+**/unlinked.ds
+**/unlinked_spec.ds
+**/.fvm/
+**/lib/generated_plugin_registrant.dart
 
-# IntelliJ related
-*.iml
+# =========================================================
+# GENERATED CODE
+# =========================================================
+**/*.g.dart
+**/*.gr.dart
+**/*.freezed.dart
+**/*.config.dart
+**/*.inject.dart
+**/*.inject.summary
+**/*.inject.g.dart
+**/*.gen.dart
+**/*.chopper.dart
+**/*.graphql.dart
+**/*.reflectable.dart
+**/lib/l10n/gen/
+
+# =========================================================
+# IDE
+# =========================================================
+**/.idea/
+**/.vscode/
+**/*.iml
+**/.project
+**/.classpath
+**/.settings/
+.atom/
 *.ipr
 *.iws
-.idea/*
-
-# Visual Studio Code related
-.classpath
-.project
-.settings/
 .vscode/*
 
-# packages file containing multi-root paths
-.packages.generated
+# =========================================================
+# OS
+# =========================================================
+**/.DS_Store
+**/*.swp
+**/*~
+*.pyc
+.svn/
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-.pub-cache/
-.pub/
-build/
-flutter_*.png
-linked_*.ds
-unlinked.ds
-unlinked_spec.ds
-.fvm/
-
-# Android related
-**/android/**/gradle-wrapper.jar
-**/android/.gradle
-**/android/captures/
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
-**/android/key.properties
-**/android/.idea/
-**/android/app/debug
-**/android/app/profile
-**/android/app/release
+# =========================================================
+# SECRETS
+# =========================================================
+**/local.properties
+**/*.local.dart
+**/*.secret.dart
+**/.env
+**/.env.*
 *.jks
+*.keystore
 
-# iOS/XCode related
+# =========================================================
+# GOOGLE
+# =========================================================
+**/google-services.json
+**/GoogleService-Info.plist
+**/.firebase/
+**/firebase.json
+**/.firebaserc
+
+# =========================================================
+# TEMPORARY FILES
+# =========================================================
+**/*.log
+**/*.tmp
+**/temp/
+**/tmp/
+**/coverage/
+**/*.lcov
+**/.buildlog/
+**/.history
+**/migrate_working_dir/
+**/app.*.map.json
+
+# =========================================================
+# ANDROID / IOS / DESKTOP (Ephemeral)
+# =========================================================
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
 **/ios/**/*.moved-aside
 **/ios/**/*.pbxuser
 **/ios/**/*.perspectivev3
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.podspec
 **/ios/**/*sync/
 **/ios/**/.sconsign.dblite
 **/ios/**/.tags*
 **/ios/**/.vagrant/
 **/ios/**/DerivedData/
 **/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
 **/ios/**/profile
 **/ios/**/xcuserdata
 **/ios/.generated/
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/.last_build_id
 **/ios/Flutter/Generated.xcconfig
 **/ios/Flutter/app.flx
 **/ios/Flutter/app.zip
-**/ios/Flutter/.last_build_id
 **/ios/Flutter/flutter_assets/
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
-# Coverage
-coverage/
+**/android/.gradle
+**/android/local.properties
+**/android/app/build
+**/android/.idea
+**/android/captures
+**/android/gradlew
+**/android/gradlew.bat
+**/android/**/gradle-wrapper.jar
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
 
-# Submodules
-packages/**/pubspec.lock
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/macos/Flutter/ephemeral/
 
-# Web related
-lib/generated_plugin_registrant.dart
-
-# Symbolication related
+# =========================================================
+# BINARIES
+# =========================================================
+**/*.exe
+**/*.exe~
+**/*.dll
+**/*.so
+**/*.dylib
+**/*.class
 app.*.symbols
 
-# Obfuscation related
-app.*.map.json
-
-# Exceptions to the above rules.
+# =========================================================
+# EXCEPTIONS
+# =========================================================
 !**/ios/**/default.mode1v3
 !**/ios/**/default.mode2v3
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-!/dev/ci/**/Gemfile.lock
-!.vscode/extensions.json
-!.vscode/launch.json
-!.idea/codeStyles/
-!.idea/dictionaries/
-!.idea/runConfigurations/
-
-# Generated l10n files
-lib/l10n/gen/
+!**/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+!**/dev/ci/**/Gemfile.lock
+!**/.vscode/extensions.json
+!**/.vscode/launch.json
+!**/.idea/codeStyles/
+!**/.idea/dictionaries/
+!**/.idea/runConfigurations/
