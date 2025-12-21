@@ -45,21 +45,8 @@ melos:
       run: melos exec -c 8 --dir-exists="test" -- "flutter test"
       description: Run unit tests in packages that have a 'test' directory.
     test:coverage:
-      run: |
-        melos exec -c 10 -- "flutter test --coverage"
-        find . -name "lcov.info" -path "*/coverage/*" | xargs -I {} echo "Merging {}"
-        find . -name "lcov.info" -path "*/coverage/*" | xargs lcov -a {} -o coverage/lcov.info || true
-        lcov --remove coverage/lcov.info \
-        'lib/*/*.g.dart' \
-        'lib/*/*.freezed.dart' \
-        'lib/**/*.g.dart' \
-        'lib/**/*.freezed.dart' \
-        '/test/**' \
-        '*/generated/*' \
-        -o coverage/lcov.info
-        genhtml coverage/lcov.info -o coverage/html
-        echo "Coverage report: coverage/html/index.html"
-      description: Run unit tests in packages that have a 'test' directory.
+      run: melos exec -c 10 -- "flutter test --coverage"
+      description: Run unit tests with coverage in all packages.
     build:run:
       run:
         melos exec -c 8 --depends-on="build_runner" -- "flutter pub run
@@ -87,6 +74,12 @@ melos:
     fix:all:
       run: melos exec -c 10 -- "dart fix --apply"
       description: Apply automatic fixes in all packages.
+    quality:check:
+      run: |
+        melos run format:check
+        melos run analyze:all
+        melos run test:unit
+      description: Run all quality checks (format, analyze, test).
     rebuild:all:
       run: |
         melos run clean:all
