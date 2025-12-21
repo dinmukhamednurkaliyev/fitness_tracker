@@ -1,0 +1,80 @@
+name: "CI: Main Pipeline"
+
+on:
+  push:
+    branches: [main, release/**]
+  pull_request:
+    branches: [main, release/**]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      flutter: ${{ steps.filter.outputs.flutter }}
+    steps:
+      - name: "Checkout Code"
+        uses: actions/checkout@v6
+
+      - name: "Detect Changes"
+        uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            flutter:
+              - '**/*.dart'
+              - '.github/workflows/flutter-*.yaml'
+
+  flutter-lint:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/flutter-lint.yaml
+    secrets: inherit
+
+  flutter-analyze:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/flutter-analyze.yaml
+    secrets: inherit
+
+  flutter-test:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/flutter-test.yaml
+    secrets: inherit
+
+  ci-pass:
+    runs-on: ubuntu-latest
+    if: always()
+    timeout-minutes: 5
+    needs:
+      - detect-changes
+      - flutter-lint
+      - flutter-analyze
+      - flutter-test
+
+    steps:
+      - name: "Check: Workflow Status"
+        run: |
+          RESULTS='${{ toJSON(needs.*.result) }}'
+          echo "Job results: $RESULTS"
+
+          if [[ "${{ needs.detect-changes.result }}" == "failure" ]]; then
+            echo "❌ Critical: Change detection failed."
+            exit 1
+          fi
+
+          if echo "$RESULTS" | grep -qE 'failure|cancelled'; then
+            echo "❌ Error: One or more required jobs failed."
+            exit 1
+          fi
+
+          echo "✅ CI Green: All checks passed or were safely skipped."
+          exit 0

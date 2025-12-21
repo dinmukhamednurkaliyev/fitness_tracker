@@ -1,0 +1,32 @@
+area/flutter:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.dart"
+          - ".github/workflows/flutter-*.yaml"
+
+area/ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+          - ".github/actions/**"
+          - ".github/labeler.yaml"
+
+type/feature:
+  - head-branch: ["^feature/", "^feat/"]
+
+type/bug:
+  - head-branch: ["^fix/", "^bugfix/", "^hotfix/"]
+
+type/chore:
+  - head-branch: ["^chore/"]
+
+type/refactor:
+  - head-branch: ["^refactor/"]
+
+type/docs:
+  - head-branch: ["^docs/"]
+  - changed-files:
+      - any-glob-to-any-file: ["**/*.md", "docs/**"]
+
+type/test:
+  - head-branch: ["^test/", "^tests/"]

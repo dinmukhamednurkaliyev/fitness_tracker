@@ -1,0 +1,94 @@
+name: fitness_tracker_application
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+  flutter: ^3.38.0
+
+dependencies:
+  bloc: ^9.0.1
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  flutter_test:
+    sdk: flutter
+  melos: ^7.3.0
+  mocktail: ^1.0.4
+  very_good_analysis: ^10.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+melos:
+  packages:
+    - packages/**
+
+  scripts:
+    prepare:all:
+      run: |
+        melos clean:all
+        melos bootstrap
+      description: Clean and bootstrap all packages.
+    analyze:all:
+      run: melos exec -c 8 -- "dart analyze . --fatal-infos --fatal-warnings"
+      description: Run static analysis across the entire repository.
+    test:unit:
+      run: melos exec -c 8 --dir-exists="test" -- "flutter test"
+      description: Run unit tests in packages that have a 'test' directory.
+    test:coverage:
+      run: |
+        melos exec -c 10 -- "flutter test --coverage"
+        find . -name "lcov.info" -path "*/coverage/*" | xargs -I {} echo "Merging {}"
+        find . -name "lcov.info" -path "*/coverage/*" | xargs lcov -a {} -o coverage/lcov.info || true
+        lcov --remove coverage/lcov.info \
+        'lib/*/*.g.dart' \
+        'lib/*/*.freezed.dart' \
+        'lib/**/*.g.dart' \
+        'lib/**/*.freezed.dart' \
+        '/test/**' \
+        '*/generated/*' \
+        -o coverage/lcov.info
+        genhtml coverage/lcov.info -o coverage/html
+        echo "Coverage report: coverage/html/index.html"
+      description: Run unit tests in packages that have a 'test' directory.
+    build:run:
+      run:
+        melos exec -c 8 --depends-on="build_runner" -- "flutter pub run
+        build_runner build --delete-conflicting-outputs"
+      description:
+        Run code generation (Freezed, JSON Serializable) only for packages that
+        depend on build_runner.
+    build:watch:
+      run:
+        melos exec -c 8 --depends-on="build_runner" -- "flutter pub run
+        build_runner watch"
+      description:
+        Run code generation (Freezed, JSON Serializable) only for packages that
+        depend on build_runner.
+    format:all:
+      run: melos exec -c 10 -- "dart format ."
+      description: Run code formatting across the entire repository.
+    format:check:
+      run: melos exec -c 10 -- "dart format . --line-length 80 --set-exit-code"
+      description:
+        Check if code formatting is correct across the entire repository.
+    clean:all:
+      run: melos exec -c 10 -- "flutter clean"
+      description: Clean all packages.
+    fix:all:
+      run: melos exec -c 10 -- "dart fix --apply"
+      description: Apply automatic fixes in all packages.
+    rebuild:all:
+      run: |
+        melos run clean:all
+        melos run prepare:all
+      description: Rebuild all packages.

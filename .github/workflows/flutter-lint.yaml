@@ -1,0 +1,23 @@
+name: "Check: Flutter Lint"
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: "Checkout Code"
+        uses: actions/checkout@v6
+
+      - name: "Flutter: Setup"
+        uses: ./.github/actions/flutter-setup/
+        id: setup
+
+      - name: "Flutter: Check Formatting"
+        if: steps.setup.outputs.installed == 'true'
+        run: melos run format:check
