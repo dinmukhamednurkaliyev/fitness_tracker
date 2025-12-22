@@ -1,4 +1,4 @@
-name: "Formatting"
+name: "CI: Formatting"
 
 on:
   workflow_call:
