@@ -26,4 +26,3 @@ jobs:
         uses: ./.github/actions/test-flutter/
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
-`
