@@ -1,4 +1,4 @@
-name: "Check: Flutter Test"
+name: "Check: Test"
 
 on:
   workflow_call:
@@ -15,14 +15,15 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: "Checkout Code"
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.1
 
       - name: "Flutter: Setup"
-        uses: ./.github/actions/flutter-setup/
+        uses: ./.github/actions/setup-flutter/
         id: setup
 
       - name: "Flutter: Run Tests"
         if: steps.setup.outputs.installed == 'true'
-        uses: ./.github/actions/flutter-test/
+        uses: ./.github/actions/test-flutter/
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
+`

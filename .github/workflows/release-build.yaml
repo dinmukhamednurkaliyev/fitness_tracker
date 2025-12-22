@@ -1,0 +1,38 @@
+name: "Release: Build Android"
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: "Build APK"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: "Checkout Code"
+        uses: actions/checkout@v6.0.1
+
+      - name: "Setup Flutter"
+        uses: ./.github/actions/setup-flutter/
+        id: setup
+
+      - name: "Build Android APK (Debug)"
+        if: steps.setup.outputs.installed == 'true'
+        id: build
+        uses: ./.github/actions/build-android/
+        with:
+          flavor: "development"
+          mode: "debug"
+          target: "lib/main_development.dart"
+          version-tag: ${{ github.event.release.tag_name || 'manual' }}
+
+      - name: "Upload APK to Release"
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2.5.0
+        with:
+          files: fitness-tracker-development-*.apk

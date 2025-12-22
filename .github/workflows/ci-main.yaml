@@ -21,7 +21,7 @@ jobs:
       flutter: ${{ steps.filter.outputs.flutter }}
     steps:
       - name: "Checkout Code"
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.1
 
       - name: "Detect Changes"
         uses: dorny/paths-filter@v3.0.2
@@ -30,24 +30,24 @@ jobs:
           filters: |
             flutter:
               - '**/*.dart'
-              - '.github/workflows/flutter-*.yaml'
+              - '.github/workflows/check-*.yaml'
 
-  flutter-lint:
+  check-lint:
     needs: detect-changes
     if: needs.detect-changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/flutter-lint.yaml
+    uses: ./.github/workflows/check-lint.yaml
     secrets: inherit
 
-  flutter-analyze:
+  check-analyze:
     needs: detect-changes
     if: needs.detect-changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/flutter-analyze.yaml
+    uses: ./.github/workflows/check-analyze.yaml
     secrets: inherit
 
-  flutter-test:
+  check-test:
     needs: detect-changes
     if: needs.detect-changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/flutter-test.yaml
+    uses: ./.github/workflows/check-test.yaml
     secrets: inherit
 
   ci-pass:
@@ -56,9 +56,9 @@ jobs:
     timeout-minutes: 5
     needs:
       - detect-changes
-      - flutter-lint
-      - flutter-analyze
-      - flutter-test
+      - check-lint
+      - check-analyze
+      - check-test
 
     steps:
       - name: "Check: Workflow Status"

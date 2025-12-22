@@ -2,7 +2,7 @@ area/flutter:
   - changed-files:
       - any-glob-to-any-file:
           - "**/*.dart"
-          - ".github/workflows/flutter-*.yaml"
+          - ".github/workflows/check-*.yaml"
 
 area/ci:
   - changed-files:
