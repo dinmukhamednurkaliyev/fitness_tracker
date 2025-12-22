@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   run:
-    name: "Update"
+    name: "Run"
     permissions:
       contents: write
       pull-requests: read

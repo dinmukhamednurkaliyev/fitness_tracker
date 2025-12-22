@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   run:
-    name: "Scan"
+    name: "Run"
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
