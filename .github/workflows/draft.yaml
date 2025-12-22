@@ -20,6 +20,6 @@ jobs:
       - name: "Drafter: Update Release"
         uses: release-drafter/release-drafter@v6.1.0
         with:
-          config-name: configs/draft.yaml
+          config-name: configurations/draft.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
