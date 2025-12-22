@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   analyze:
-    name: "Analyze Code"
+    name: "Scan"
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

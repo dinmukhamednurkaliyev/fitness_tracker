@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   test:
-    name: "Run Tests"
+    name: "Run"
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

@@ -1,4 +1,4 @@
-name: "Release: Build Android"
+name: "Release Build"
 
 on:
   release:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    name: "Build APK"
+    name: "Build"
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:

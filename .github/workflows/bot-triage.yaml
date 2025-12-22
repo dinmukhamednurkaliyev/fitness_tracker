@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   triage:
-    name: "Triage PR"
+    name: "Label"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Code"

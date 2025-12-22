@@ -1,4 +1,4 @@
-name: "Bot: Release Drafter"
+name: "Release Draft"
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   draft:
-    name: "Draft Release Notes"
+    name: "Update"
     permissions:
       contents: write
       pull-requests: read

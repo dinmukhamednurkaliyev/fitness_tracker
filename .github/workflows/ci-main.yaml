@@ -1,4 +1,4 @@
-name: "CI: Main Pipeline"
+name: "CI Pipeline"
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   detect-changes:
-    name: "Detect Changes"
+    name: "Changes"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -55,7 +55,7 @@ jobs:
     secrets: inherit
 
   ci-pass:
-    name: "Verify CI Status"
+    name: "Verify"
     runs-on: ubuntu-latest
     if: always()
     timeout-minutes: 5
