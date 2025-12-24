@@ -1,4 +1,4 @@
-name: "CI: Analysis"
+name: "CI: Analyze"
 
 on:
   workflow_call:

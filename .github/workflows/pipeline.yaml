@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   changes:
-    name: "Changes"
+    name: "CI: Changes"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -34,28 +34,28 @@ jobs:
               - '.github/workflows/*.yaml'
 
   lint:
-    name: "Formatting"
+    name: "CI: Lint"
     needs: changes
     if: needs.changes.outputs.flutter == 'true'
     uses: ./.github/workflows/lint.yaml
     secrets: inherit
 
   analyze:
-    name: "Analysis"
+    name: "CI: Analyze"
     needs: changes
     if: needs.changes.outputs.flutter == 'true'
     uses: ./.github/workflows/analyze.yaml
     secrets: inherit
 
   test:
-    name: "Testing"
+    name: "CI: Test"
     needs: changes
     if: needs.changes.outputs.flutter == 'true'
     uses: ./.github/workflows/test.yaml
     secrets: inherit
 
   status:
-    name: "Verify"
+    name: "CI: Verify"
     runs-on: ubuntu-latest
     if: always()
     timeout-minutes: 5
