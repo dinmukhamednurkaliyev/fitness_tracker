@@ -14,6 +14,8 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_localizations:
     sdk: flutter
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   intl: ^0.20.2
 
 dev_dependencies:
@@ -49,25 +51,22 @@ melos:
       description: Run unit tests with coverage in all packages.
     build:run:
       run:
-        melos exec -c 8 --depends-on="build_runner" -- "flutter pub run
-        build_runner build --delete-conflicting-outputs"
+        melos exec -c 8 --depends-on="build_runner" -- "flutter pub run build_runner build
+        --delete-conflicting-outputs"
       description:
-        Run code generation (Freezed, JSON Serializable) only for packages that
-        depend on build_runner.
+        Run code generation (Freezed, JSON Serializable) only for packages that depend on
+        build_runner.
     build:watch:
-      run:
-        melos exec -c 8 --depends-on="build_runner" -- "flutter pub run
-        build_runner watch"
+      run: melos exec -c 8 --depends-on="build_runner" -- "flutter pub run build_runner watch"
       description:
-        Run code generation (Freezed, JSON Serializable) only for packages that
-        depend on build_runner.
+        Run code generation (Freezed, JSON Serializable) only for packages that depend on
+        build_runner.
     format:all:
       run: melos exec -c 10 -- "dart format ."
       description: Run code formatting across the entire repository.
     format:check:
       run: melos exec -c 10 -- "dart format . --line-length 80 --set-exit-code"
-      description:
-        Check if code formatting is correct across the entire repository.
+      description: Check if code formatting is correct across the entire repository.
     clean:all:
       run: melos exec -c 10 -- "flutter clean"
       description: Clean all packages.

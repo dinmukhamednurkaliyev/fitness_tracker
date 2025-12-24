@@ -1,5 +1,4 @@
-import 'package:fitness_tracker_application/counter/counter.dart';
-import 'package:fitness_tracker_application/l10n/l10n.dart';
+import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
 
 class Application extends StatelessWidget {
@@ -14,9 +13,7 @@ class Application extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
