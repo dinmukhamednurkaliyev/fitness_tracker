@@ -40,31 +40,53 @@ jobs:
 
             commits.forEach(c => {
               const msg = c.commit.message.toLowerCase();
-              if (msg.startsWith('feat')) groups.feat.push(formatCommit(c));
-              else if (msg.startsWith('fix')) groups.fix.push(formatCommit(c));
-              else if (msg.startsWith('chore') || msg.startsWith('ci') || msg.startsWith('test')) groups.chore.push(formatCommit(c));
-              else groups.other.push(formatCommit(c));
+
+              if (msg.startsWith('feat') || msg.startsWith('feature')) {
+                groups.feat.push(formatCommit(c));
+              } else if (msg.startsWith('fix') || msg.startsWith('bug')) {
+                groups.fix.push(formatCommit(c));
+              } else if (
+                msg.startsWith('chore') ||
+                msg.startsWith('ci') ||
+                msg.startsWith('test') ||
+                msg.startsWith('style') ||
+                msg.startsWith('refactor') ||
+                msg.startsWith('build')
+              ) {
+                groups.chore.push(formatCommit(c));
+              } else {
+                groups.other.push(formatCommit(c));
+              }
             });
 
             let htmlContent = '';
 
-            if (groups.feat.length) htmlContent += `<h4>🚀 Features</h4><ul>${groups.feat.join('')}</ul>`;
-            if (groups.fix.length) htmlContent += `<h4>🐛 Bug Fixes</h4><ul>${groups.fix.join('')}</ul>`;
-            if (groups.chore.length) htmlContent += `<h4>🔧 Maintenance & Chore</h4><ul>${groups.chore.join('')}</ul>`;
+            if (groups.feat.length)  htmlContent += `<h4>🚀 Features</h4><ul>${groups.feat.join('')}</ul>`;
+            if (groups.fix.length)   htmlContent += `<h4>🐛 Bug Fixes</h4><ul>${groups.fix.join('')}</ul>`;
+            if (groups.chore.length) htmlContent += `<h4>🔧 Maintenance</h4><ul>${groups.chore.join('')}</ul>`;
             if (groups.other.length) htmlContent += `<h4>📦 Other Changes</h4><ul>${groups.other.join('')}</ul>`;
+
+            if (!htmlContent) {
+               htmlContent = '<ul><li><em>No significant changes found.</em></li></ul>';
+            }
 
             const finalBlock = `
             <!-- START_AUTO_SECTION -->
+            <hr />
             <details>
-              <summary><strong>🤖 Auto-generated Summary</strong></summary>
+              <summary><strong>Commits</strong></summary>
               <br />
-              ${htmlContent || '<em>No new commits found.</em>'}
-              <p align="right"><small>Updated automatically by GitHub Actions</small></p>
+              ${htmlContent}
             </details>
             <!-- END_AUTO_SECTION -->
             `;
 
-            let body = pr.body || "";
+            const { data: currentPr } = await github.rest.pulls.get({
+              owner, repo, pull_number: pr.number
+            });
+
+            let body = currentPr.body || "";
+
             const regex = /<!-- START_AUTO_SECTION -->[\s\S]*<!-- END_AUTO_SECTION -->/;
 
             if (body.match(regex)) {
@@ -74,5 +96,8 @@ jobs:
             }
 
             await github.rest.pulls.update({
-              owner, repo, pull_number: pr.number, body: body
+              owner,
+              repo,
+              pull_number: pr.number,
+              body: body
             });
