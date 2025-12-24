@@ -34,6 +34,9 @@ jobs:
             const groups = {
               feat: [],
               fix: [],
+              docs: [],
+              refactor: [],
+              test: [],
               chore: [],
               other: []
             };
@@ -45,13 +48,18 @@ jobs:
                 groups.feat.push(formatCommit(c));
               } else if (msg.startsWith('fix') || msg.startsWith('bug')) {
                 groups.fix.push(formatCommit(c));
+              } else if (msg.startsWith('docs')) {
+                groups.docs.push(formatCommit(c));
+              } else if (msg.startsWith('refactor')) {
+                groups.refactor.push(formatCommit(c));
+              } else if (msg.startsWith('test') || msg.startsWith('tests')) {
+                groups.test.push(formatCommit(c));
               } else if (
                 msg.startsWith('chore') ||
                 msg.startsWith('ci') ||
-                msg.startsWith('test') ||
                 msg.startsWith('style') ||
-                msg.startsWith('refactor') ||
-                msg.startsWith('build')
+                msg.startsWith('build') ||
+                msg.startsWith('perf')
               ) {
                 groups.chore.push(formatCommit(c));
               } else {
@@ -61,10 +69,13 @@ jobs:
 
             let htmlContent = '';
 
-            if (groups.feat.length)  htmlContent += `<h4>🚀 Features</h4><ul>${groups.feat.join('')}</ul>`;
-            if (groups.fix.length)   htmlContent += `<h4>🐛 Bug Fixes</h4><ul>${groups.fix.join('')}</ul>`;
-            if (groups.chore.length) htmlContent += `<h4>🔧 Maintenance</h4><ul>${groups.chore.join('')}</ul>`;
-            if (groups.other.length) htmlContent += `<h4>📦 Other Changes</h4><ul>${groups.other.join('')}</ul>`;
+            if (groups.feat.length)     htmlContent += `<h4>🚀 Features</h4><ul>${groups.feat.join('')}</ul>`;
+            if (groups.fix.length)      htmlContent += `<h4>🐛 Bug Fixes</h4><ul>${groups.fix.join('')}</ul>`;
+            if (groups.docs.length)     htmlContent += `<h4>📝 Documentation</h4><ul>${groups.docs.join('')}</ul>`;
+            if (groups.refactor.length) htmlContent += `<h4>♻️ Refactoring</h4><ul>${groups.refactor.join('')}</ul>`;
+            if (groups.test.length)     htmlContent += `<h4>🧪 Tests</h4><ul>${groups.test.join('')}</ul>`;
+            if (groups.chore.length)    htmlContent += `<h4>🔧 Maintenance & Chore</h4><ul>${groups.chore.join('')}</ul>`;
+            if (groups.other.length)    htmlContent += `<h4>📦 Other Changes</h4><ul>${groups.other.join('')}</ul>`;
 
             if (!htmlContent) {
                htmlContent = '<ul><li><em>No significant changes found.</em></li></ul>';
