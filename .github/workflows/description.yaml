@@ -1,4 +1,4 @@
-name: "PR: Auto-fill Commits"
+name: "PR: Description"
 
 on:
   pull_request:
@@ -9,11 +9,11 @@ permissions:
   contents: read
 
 jobs:
-  update:
+  run:
     runs-on: ubuntu-latest
     steps:
-      - name: Update PR Description
-        uses: actions/github-script@v8.0.0
+      - name: "PR: Description"
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -24,44 +24,55 @@ jobs:
               owner, repo, pull_number: pr.number
             });
 
-            const rows = commits.map(c => {
+            const formatCommit = (c) => {
               const shortSha = c.sha.substring(0, 7);
-              const message = c.commit.message.split('\n')[0];
+              const msg = c.commit.message.split('\n')[0];
               const url = c.html_url;
+              return `<li><a href="${url}"><code>${shortSha}</code></a> ${msg}</li>`;
+            };
 
-              return `<li><a href="${url}"><code>${shortSha}</code></a> ${message}</li>`;
-            }).join('\n');
+            const groups = {
+              feat: [],
+              fix: [],
+              chore: [],
+              other: []
+            };
 
-            const compareUrl = `${pr.html_url}/files`;
+            commits.forEach(c => {
+              const msg = c.commit.message.toLowerCase();
+              if (msg.startsWith('feat')) groups.feat.push(formatCommit(c));
+              else if (msg.startsWith('fix')) groups.fix.push(formatCommit(c));
+              else if (msg.startsWith('chore') || msg.startsWith('ci') || msg.startsWith('test')) groups.chore.push(formatCommit(c));
+              else groups.other.push(formatCommit(c));
+            });
 
-            const dependabotStyleBlock = `
+            let htmlContent = '';
+
+            if (groups.feat.length) htmlContent += `<h4>🚀 Features</h4><ul>${groups.feat.join('')}</ul>`;
+            if (groups.fix.length) htmlContent += `<h4>🐛 Bug Fixes</h4><ul>${groups.fix.join('')}</ul>`;
+            if (groups.chore.length) htmlContent += `<h4>🔧 Maintenance & Chore</h4><ul>${groups.chore.join('')}</ul>`;
+            if (groups.other.length) htmlContent += `<h4>📦 Other Changes</h4><ul>${groups.other.join('')}</ul>`;
+
+            const finalBlock = `
             <!-- START_AUTO_SECTION -->
-
             <details>
-              <summary><strong>Commits</strong></summary>
+              <summary><strong>🤖 Auto-generated Summary</strong></summary>
               <br />
-              <ul>
-            ${rows}
-              </ul>
-              <p><a href="${compareUrl}">Additional commits viewable in compare view</a></p>
+              ${htmlContent || '<em>No new commits found.</em>'}
+              <p align="right"><small>Updated automatically by GitHub Actions</small></p>
             </details>
-
             <!-- END_AUTO_SECTION -->
             `;
 
             let body = pr.body || "";
-
             const regex = /<!-- START_AUTO_SECTION -->[\s\S]*<!-- END_AUTO_SECTION -->/;
 
             if (body.match(regex)) {
-              body = body.replace(regex, dependabotStyleBlock);
+              body = body.replace(regex, finalBlock);
             } else {
-              body = body + "\n\n" + dependabotStyleBlock;
+              body = body + "\n\n" + finalBlock;
             }
 
             await github.rest.pulls.update({
-              owner,
-              repo,
-              pull_number: pr.number,
-              body: body
+              owner, repo, pull_number: pr.number, body: body
             });
