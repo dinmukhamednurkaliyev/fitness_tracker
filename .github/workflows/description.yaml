@@ -1,0 +1,114 @@
+name: "PR: Description"
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "PR: Description"
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request;
+
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner, repo, pull_number: pr.number
+            });
+
+            const formatCommit = (c) => {
+              const shortSha = c.sha.substring(0, 7);
+              const msg = c.commit.message.split('\n')[0];
+              const url = c.html_url;
+              return `<li><a href="${url}"><code>${shortSha}</code></a> ${msg}</li>`;
+            };
+
+            const groups = {
+              feat: [],
+              fix: [],
+              docs: [],
+              refactor: [],
+              test: [],
+              chore: [],
+              other: []
+            };
+
+            commits.forEach(c => {
+              const msg = c.commit.message.toLowerCase();
+
+              if (msg.startsWith('feat') || msg.startsWith('feature')) {
+                groups.feat.push(formatCommit(c));
+              } else if (msg.startsWith('fix') || msg.startsWith('bug')) {
+                groups.fix.push(formatCommit(c));
+              } else if (msg.startsWith('docs')) {
+                groups.docs.push(formatCommit(c));
+              } else if (msg.startsWith('refactor')) {
+                groups.refactor.push(formatCommit(c));
+              } else if (msg.startsWith('test') || msg.startsWith('tests')) {
+                groups.test.push(formatCommit(c));
+              } else if (
+                msg.startsWith('chore') ||
+                msg.startsWith('ci') ||
+                msg.startsWith('style') ||
+                msg.startsWith('build') ||
+                msg.startsWith('perf')
+              ) {
+                groups.chore.push(formatCommit(c));
+              } else {
+                groups.other.push(formatCommit(c));
+              }
+            });
+
+            let htmlContent = '';
+
+            if (groups.feat.length)     htmlContent += `<h4>🚀 Features</h4><ul>${groups.feat.join('')}</ul>`;
+            if (groups.fix.length)      htmlContent += `<h4>🐛 Bug Fixes</h4><ul>${groups.fix.join('')}</ul>`;
+            if (groups.docs.length)     htmlContent += `<h4>📝 Documentation</h4><ul>${groups.docs.join('')}</ul>`;
+            if (groups.refactor.length) htmlContent += `<h4>♻️ Refactoring</h4><ul>${groups.refactor.join('')}</ul>`;
+            if (groups.test.length)     htmlContent += `<h4>🧪 Tests</h4><ul>${groups.test.join('')}</ul>`;
+            if (groups.chore.length)    htmlContent += `<h4>🔧 Maintenance & Chore</h4><ul>${groups.chore.join('')}</ul>`;
+            if (groups.other.length)    htmlContent += `<h4>📦 Other Changes</h4><ul>${groups.other.join('')}</ul>`;
+
+            if (!htmlContent) {
+               htmlContent = '<ul><li><em>No significant changes found.</em></li></ul>';
+            }
+
+            const finalBlock = `
+            <!-- START_AUTO_SECTION -->
+            <hr />
+            <details>
+              <summary><strong>Commits</strong></summary>
+              <br />
+              ${htmlContent}
+            </details>
+            <!-- END_AUTO_SECTION -->
+            `;
+
+            const { data: currentPr } = await github.rest.pulls.get({
+              owner, repo, pull_number: pr.number
+            });
+
+            let body = currentPr.body || "";
+
+            const regex = /<!-- START_AUTO_SECTION -->[\s\S]*<!-- END_AUTO_SECTION -->/;
+
+            if (body.match(regex)) {
+              body = body.replace(regex, finalBlock);
+            } else {
+              body = body + "\n\n" + finalBlock;
+            }
+
+            await github.rest.pulls.update({
+              owner,
+              repo,
+              pull_number: pr.number,
+              body: body
+            });

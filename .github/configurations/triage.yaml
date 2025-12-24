@@ -2,14 +2,20 @@ area/flutter:
   - changed-files:
       - any-glob-to-any-file:
           - "**/*.dart"
-          - ".github/workflows/*.yaml"
+          - "pubspec.yaml"
 
 area/ci:
   - changed-files:
       - any-glob-to-any-file:
-          - ".github/workflows/**"
-          - ".github/actions/**"
-          - ".github/configurations/triage.yaml"
+          - ".github/**"
+          - "codecov.yml"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "pubspec.yaml"
+          - "pubspec.lock"
+  - head-branch: ["^dependabot/"]
 
 type/feature:
   - head-branch: ["^feature/", "^feat/"]
@@ -18,7 +24,8 @@ type/bug:
   - head-branch: ["^fix/", "^bugfix/", "^hotfix/"]
 
 type/chore:
-  - head-branch: ["^chore/"]
+  - head-branch: ["^chore/", "^ci/"]
+  - head-branch: ["^dependabot/"]
 
 type/refactor:
   - head-branch: ["^refactor/"]
@@ -26,7 +33,9 @@ type/refactor:
 type/docs:
   - head-branch: ["^docs/"]
   - changed-files:
-      - any-glob-to-any-file: ["**/*.md", "docs/**"]
+      - any-glob-to-any-file: ["**/*.md", "LICENSE"]
 
 type/test:
   - head-branch: ["^test/", "^tests/"]
+  - changed-files:
+      - any-glob-to-any-file: ["test/**", "integration_test/**"]
