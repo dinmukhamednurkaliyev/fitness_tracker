@@ -1,15 +1,14 @@
-name: Feature Request
-description: A new feature to be added to the project
-title: "feat: "
-labels: [feature]
+name: Revert
+description: Revert a previous commit
+title: "revert: "
+labels: [revert]
 body:
   - type: textarea
     id: description
     attributes:
       label: Description
-      description:
-        Clearly describe what you are looking to add. The more business/user context the better.
-      placeholder: "Provide a description of the feature."
+      description: Provide a link to a PR/Commit that you are looking to revert and why.
+      placeholder: "Provide a description of and link to the commit that needs to be reverted."
     validations:
       required: true
   - type: textarea
@@ -20,8 +19,9 @@ body:
         The list of requirements that need to be met in order to consider the ticket to be
         completed. Please be as explicit as possible.
       value: |
-        - [ ] All CI/CD checks are passing.
-        - [ ] There is no drop in the test coverage percentage.
+        - [ ] Change has been reverted.
+        - [ ] No change in unit/widget test coverage has happened.
+        - [ ] A new ticket is created for any follow on work that needs to happen.
     validations:
       required: true
   - type: textarea

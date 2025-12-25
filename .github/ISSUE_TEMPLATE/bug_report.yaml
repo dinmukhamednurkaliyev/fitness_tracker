@@ -1,57 +1,41 @@
-name: 🐛 Bug Report
-description: Report a bug so we can fix it
-title: "[Bug]: "
-labels: ["type/bug", "status/wip"]
+name: Bug Report
+description: Create a report to help us improve
+title: "fix: "
+labels: [bug]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thank you for taking the time to fill out the report! Please describe the issue as detailed as possible.
-
-  - type: dropdown
-    id: area
-    attributes:
-      label: area
-      description: In which part of the project did the error occur?
-      options:
-        - "Flutter: Client App (Mobile)"
-        - "Flutter: Core UI Package"
-        - "CI/CD & DevOps"
-    validations:
-      required: true
-
   - type: textarea
     id: description
     attributes:
-      label: Description of the problem
-      description: What happened?
-      placeholder: A short and clear description of the error...
+      label: Description
+      description: A clear and concise description of what the bug is.
+      placeholder: "Describe the bug."
     validations:
       required: true
-
   - type: textarea
-    id: steps
+    id: setps-to-reproduce
     attributes:
-      label: Steps to reproduce
-      description: How can we see this error?
+      label: Steps To Reproduce
+      description: A set of instructions, step by step, explaining how to reproduce the bug.
       placeholder: |
-        1. Open screen '...'
-        2. Click on button '...'
-        3. See error
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
     validations:
       required: true
-
-  - type: input
-    id: version
-    attributes:
-      label: Version of the app / Commit Hash
-      placeholder: v1.0.2 or sha123456
-    validations:
-      required: false
-
   - type: textarea
-    id: logs
+    id: expected-behavior
     attributes:
-      label: Logs or Screenshots
-      description: Insert logs here or attach files
-      render: shell
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: "Describe what you expected to happen."
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description:
+        Add any other context, including links/screenshots/video recordings/etc about the problem
+        here.
+      placeholder: "Provide context here."

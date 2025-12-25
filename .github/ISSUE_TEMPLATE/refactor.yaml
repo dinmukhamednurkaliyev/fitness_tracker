@@ -1,15 +1,16 @@
-name: Feature Request
-description: A new feature to be added to the project
-title: "feat: "
-labels: [feature]
+name: Refactor
+description: A code change that neither fixes a bug nor adds a feature
+title: "refactor: "
+labels: [refactor]
 body:
   - type: textarea
     id: description
     attributes:
       label: Description
       description:
-        Clearly describe what you are looking to add. The more business/user context the better.
-      placeholder: "Provide a description of the feature."
+        Clearly describe what needs to be refactored and why. Please provide links to related issues
+        (bugs or upcoming features) in order to help prioritize.
+      placeholder: "Provide a description of the refactor."
     validations:
       required: true
   - type: textarea

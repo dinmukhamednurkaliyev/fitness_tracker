@@ -1,0 +1,29 @@
+name: "Continuous Integration: Test"
+
+on:
+  workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    name: "Run"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: "Git: Checkout"
+        uses: actions/checkout@v6.0.1
+
+      - name: "Flutter: Setup"
+        uses: ./.github/actions/flutter_setup/
+        id: setup
+
+      - name: "Flutter: Test"
+        if: steps.setup.outputs.installed == 'true'
+        uses: ./.github/actions/flutter_test/
+        with:
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}

@@ -1,15 +1,14 @@
-name: Feature Request
-description: A new feature to be added to the project
-title: "feat: "
-labels: [feature]
+name: Continuous Integration
+description: Changes to the CI configuration files and scripts
+title: "continuous-integration: "
+labels: [continuous-integration]
 body:
   - type: textarea
     id: description
     attributes:
       label: Description
-      description:
-        Clearly describe what you are looking to add. The more business/user context the better.
-      placeholder: "Provide a description of the feature."
+      description: Describe what changes need to be done to the CI/CD system and why.
+      placeholder: "Provide a description of the changes that need to be done to the CI/CD system."
     validations:
       required: true
   - type: textarea

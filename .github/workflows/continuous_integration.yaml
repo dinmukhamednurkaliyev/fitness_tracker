@@ -1,0 +1,94 @@
+name: "Continuous Integration: Pipeline"
+
+on:
+  push:
+    branches: [main, tutorial, release/**]
+  pull_request:
+    branches: [main, tutorial, release/**]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs: 
+  changes:
+    name: "Continuous Integration: Changes"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      flutter: ${{ steps.filter.outputs.flutter }}
+    steps:
+      - name: "Git: Checkout"
+        uses: actions/checkout@v6.0.1
+
+      - name: "Filter: Detect Changes"
+        uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            flutter:
+              - '**/*.dart'
+              - '.github/workflows/*.yaml'
+
+  lint:
+    name: "Continuous Integration: Lint"
+    needs: changes
+    if: needs.changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/continuous_integration_lint.yaml
+    secrets: inherit
+
+  analyze:
+    name: "Continuous Integration: Analyze"
+    needs: changes
+    if: needs.changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/continuous_integration_analyze.yaml
+    secrets: inherit
+
+  test:
+    name: "Continuous Integration: Test"
+    needs: changes
+    if: needs.changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/continuous_integration_test.yaml
+    secrets: inherit
+
+  spellcheck:
+    name: "Continuous Integration: Spell Check"
+    needs: changes
+    if: needs.changes.outputs.flutter == 'true'
+    uses: ./.github/workflows/continuous_integration_spellcheck.yaml
+    secrets: inherit
+
+  status:
+    name: "Continuous Integration: Verify"
+    runs-on: ubuntu-latest
+    if: always()
+    timeout-minutes: 5
+    needs:
+      - changes
+      - lint
+      - analyze
+      - test
+      - spellcheck
+
+    steps:
+      - name: "Continuous Integration: Verify Status"
+        run: |
+          RESULTS='${{ toJSON(needs.*.result) }}'
+          echo "Job results: $RESULTS"
+
+          if [[ "${{ needs.changes.result }}" == "failure" ]]; then
+            echo "❌ Critical: Change detection failed."
+            exit 1
+          fi
+
+          if echo "$RESULTS" | grep -qE 'failure|cancelled'; then
+            echo "❌ Error: One or more required jobs failed."
+            exit 1
+          fi
+
+          echo "✅ CI Green: All checks passed or were safely skipped."
+          exit 0

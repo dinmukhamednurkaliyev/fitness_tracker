@@ -1,15 +1,16 @@
-name: Feature Request
-description: A new feature to be added to the project
-title: "feat: "
-labels: [feature]
+name: Performance Update
+description: A code change that improves performance
+title: "perf: "
+labels: [performance]
 body:
   - type: textarea
     id: description
     attributes:
       label: Description
       description:
-        Clearly describe what you are looking to add. The more business/user context the better.
-      placeholder: "Provide a description of the feature."
+        Clearly describe what code needs to be changed and what the performance impact is going to
+        be. Bonus point's if you can tie this directly to user experience.
+      placeholder: " Provide a description of the performance update."
     validations:
       required: true
   - type: textarea

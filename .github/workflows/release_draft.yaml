@@ -1,0 +1,25 @@
+name: "Release: Draft"
+
+on:
+  push:
+    branches: [main, tutorial, release/**]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    name: "Run"
+    permissions:
+      contents: write
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Drafter: Update Release"
+        uses: release-drafter/release-drafter@v6.1.0
+        with:
+          config-name: configurations/release_draft.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

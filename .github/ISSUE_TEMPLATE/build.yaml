@@ -1,15 +1,14 @@
-name: Feature Request
-description: A new feature to be added to the project
-title: "feat: "
-labels: [feature]
+name: Build System
+description: Changes that affect the build system or external dependencies
+title: "build: "
+labels: [build]
 body:
   - type: textarea
     id: description
     attributes:
       label: Description
-      description:
-        Clearly describe what you are looking to add. The more business/user context the better.
-      placeholder: "Provide a description of the feature."
+      description: Describe what changes need to be done to the build system and why
+      placeholder: "Describe the build system change."
     validations:
       required: true
   - type: textarea
