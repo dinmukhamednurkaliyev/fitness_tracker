@@ -1,0 +1,22 @@
+{
+    "search.exclude": {
+    "**/.fvm": true,
+    "**/.git": true,
+    "**/.dart_tool": true,
+    "**/build": true,
+    "**/.pub-cache": true,
+    "**/ios/Pods": true,
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true,
+    "**/*.config.dart": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.dart_tool/**": true,
+    "**/build/**": true,
+    "**/.pub-cache/**": true,
+    "**/ios/Pods/**": true
+  },
+  "conventionalCommits.scopes": ["ci"]
+}

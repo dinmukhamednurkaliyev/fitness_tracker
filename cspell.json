@@ -1,7 +1,10 @@
 {
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "dictionaries": ["vgv_allowed", "vgv_forbidden"],
+  "dictionaries": [
+    "vgv_allowed",
+    "vgv_forbidden"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "vgv_allowed",
@@ -16,24 +19,23 @@
   ],
   "useGitignore": true,
   "words": [
-    "dinmukhamednurkaliyev",
-    "dorny",
+    "clsx",
     "codeowners",
     "contador",
+    "dinmukhamednurkaliyev",
+    "dorny",
+    "fluttium",
     "goldens",
+    "gradlew",
     "localizable",
     "mipmap",
+    "mockingjay",
     "mostrado",
     "página",
     "pregen",
     "srealmoreno",
     "texto",
     "verygoodcore",
-    "xcassets",
-    "gradlew",
-    "fluttium",
-    "clsx",
-    "mockingjay",
-
+    "xcassets"
   ]
 }
