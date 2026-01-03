@@ -1,1 +1,0 @@
-export 'view/application.dart';

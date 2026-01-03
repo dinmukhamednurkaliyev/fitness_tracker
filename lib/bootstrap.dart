@@ -3,9 +3,10 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class AppBlocObserver extends BlocObserver {
-  const AppBlocObserver();
+class ApplicationBlocObserver extends BlocObserver {
+  const ApplicationBlocObserver();
 
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
@@ -25,9 +26,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  Bloc.observer = const AppBlocObserver();
-
-  // Add cross-flavor configuration here
-
+  Bloc.observer = const ApplicationBlocObserver();
+  await Hive.initFlutter();
+  await Hive.openBox<String>('application_box');
   runApp(await builder());
 }

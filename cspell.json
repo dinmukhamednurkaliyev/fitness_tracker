@@ -18,6 +18,13 @@
     }
   ],
   "useGitignore": true,
+  "ignorePaths": [
+    "**/android/**",
+    "**/ios/**",
+    "**/web/**",
+    "**/macos/**",
+    "**/windows/**"
+  ],
   "words": [
     "clsx",
     "codeowners",
@@ -37,6 +44,7 @@
     "texto",
     "verygoodcore",
     "xcassets",
-    "xxxs"
+    "xxxs",
+    "getenv",
   ]
 }
