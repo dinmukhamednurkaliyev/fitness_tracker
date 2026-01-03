@@ -59,21 +59,24 @@ class BottomNavigationScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.color;
+    final padding = context.padding;
+    final radius = context.radius;
     return Scaffold(
       body: shell,
       bottomNavigationBar: SizedBox(
         height: 100,
         child: Container(
           margin: EdgeInsets.only(
-            bottom: context.spacing.xxl,
-            top: context.spacing.xxs,
-            left: context.spacing.xxl,
-            right: context.spacing.xxl,
+            bottom: padding.xxl,
+            top: padding.xxs,
+            left: padding.xxl,
+            right: padding.xxl,
           ),
-          padding: EdgeInsets.symmetric(vertical: context.padding.xxs),
+          padding: EdgeInsets.symmetric(vertical: padding.xxs),
           decoration: BoxDecoration(
-            color: context.color.backgroundSecondary,
-            borderRadius: BorderRadius.circular(context.radius.xxxl),
+            color: color.bottomNavigationBackground,
+            borderRadius: BorderRadius.circular(radius.xxxl),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,18 +117,19 @@ class _NavigationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.color;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 56,
         height: 56,
         decoration: BoxDecoration(
-          color: isSelected ? context.color.backgroundPrimary : Colors.transparent,
+          color: isSelected ? color.backgroundPrimary : Colors.transparent,
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
-          color: isSelected ? context.color.backgroundSecondary : context.color.backgroundPrimary,
+          color: isSelected ? color.backgroundSecondary : color.backgroundPrimary,
           size: 24,
         ),
       ),
