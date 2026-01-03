@@ -4,4 +4,5 @@ analyzer:
     - lib/l10n/gen/*
 linter:
   rules:
+    lines_longer_than_80_chars: false
     public_member_api_docs: false
