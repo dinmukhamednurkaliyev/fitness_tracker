@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 ThemeData buildTheme() {
   final base = ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: SemanticColor.regular().cardPrimary,
+    colorSchemeSeed: SemanticColor.regular().cardBlue,
     textTheme: const TextTheme(),
     extensions: <ThemeExtension<dynamic>>[
       SemanticSpacing.regular(),
       SemanticPadding.regular(),
       SemanticColor.regular(),
       SemanticRadius.regular(),
+      SemanticGradient.regular(),
     ],
   );
 
@@ -36,4 +37,5 @@ extension ThemeContextExtension on BuildContext {
   SemanticPadding get padding => theme.extension<SemanticPadding>()!;
   SemanticColor get color => theme.extension<SemanticColor>()!;
   SemanticRadius get radius => theme.extension<SemanticRadius>()!;
+  SemanticGradient get gradient => theme.extension<SemanticGradient>()!;
 }

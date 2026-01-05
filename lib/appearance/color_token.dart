@@ -4,24 +4,56 @@ class _PrimitiveColor {
   const _PrimitiveColor();
 
   static const Color grey50 = Color(0xFFF2EEF9);
+  static const Color grey100 = Color(0xFFF0F0F0);
+  static const Color grey200 = Color(0xFFF0EBF7);
+  static const Color grey300 = Color(0xFFE0E0E0);
+  static const Color grey400 = Color(0xFFE8E2F3);
+  static const Color grey500 = Color(0xFFCCCCCC);
+  static const Color grey600 = Color(0xFF999999);
+  static const Color grey700 = Color(0xFF666666);
+  static const Color grey800 = Color(0xFF1A1A1A);
   static const Color grey900 = Color(0xFF0F1115);
+
+  static const Color opacity04 = Color(0x0A000000);
+  static const Color opacity10 = Color(0x1A000000);
+  static const Color opacity20 = Color(0x33000000);
+
   static const Color blue100 = Color(0xFFBBD2FF);
   static const Color yellow400 = Color(0xFFFFC85D);
   static const Color green50 = Color(0xFFE7F8ED);
   static const Color orange100 = Color(0xFFFFEED6);
-  static const Color grey400 = Color(0xFFCCCCCC);
+  static const Color orange700 = Color(0xFFFF6B35);
   static const Color red400 = Color(0xFFFF6B6B);
   static const Color teal400 = Color(0xFF4ECDC4);
-  static const Color orange700 = Color(0xFFFF6B35);
 }
 
 @immutable
 class SemanticColor extends ThemeExtension<SemanticColor> {
   const SemanticColor({
-    required this.cardPrimary,
-    required this.cardSecondary,
-    required this.pillPrimary,
-    required this.pillSecondary,
+    required this.iconGrey,
+    required this.iconLightGrey,
+    required this.borderGrey,
+    required this.borderLight,
+    required this.shadowDark,
+    required this.shadowLight,
+    required this.shadowMedium,
+    required this.socialBlue,
+    required this.socialPink,
+    required this.socialRed,
+    required this.difficultyEasy,
+    required this.difficultyHard,
+    required this.difficultyMedium,
+    required this.bottomNavigationBackground,
+    required this.metricBackgroundBlue,
+    required this.metricBackgroundGreen,
+    required this.metricBackgroundOrange,
+    required this.pillGreen,
+    required this.pillOrange,
+    required this.cardBlue,
+    required this.cardOrange,
+    required this.cardRed,
+    required this.cardTeal,
+    required this.cardYellow,
     required this.textPrimary,
     required this.textSecondary,
     required this.backgroundPrimary,
@@ -30,28 +62,65 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
 
   factory SemanticColor.regular() {
     return const SemanticColor(
-      cardPrimary: _PrimitiveColor.blue100,
-      cardSecondary: _PrimitiveColor.yellow400,
-      pillPrimary: _PrimitiveColor.green50,
-      pillSecondary: _PrimitiveColor.orange100,
       textPrimary: _PrimitiveColor.grey900,
       textSecondary: _PrimitiveColor.grey900,
       backgroundPrimary: _PrimitiveColor.grey50,
       backgroundSecondary: _PrimitiveColor.grey900,
+      cardBlue: _PrimitiveColor.blue100,
+      cardOrange: _PrimitiveColor.orange700,
+      cardRed: _PrimitiveColor.red400,
+      cardTeal: _PrimitiveColor.teal400,
+      cardYellow: _PrimitiveColor.yellow400,
+      pillGreen: _PrimitiveColor.green50,
+      pillOrange: _PrimitiveColor.orange100,
+      metricBackgroundGreen: _PrimitiveColor.green50,
+      metricBackgroundBlue: _PrimitiveColor.blue100,
+      metricBackgroundOrange: _PrimitiveColor.orange100,
+      bottomNavigationBackground: _PrimitiveColor.grey900,
+      difficultyEasy: Colors.green,
+      difficultyMedium: Colors.orange,
+      difficultyHard: Colors.red,
+      socialBlue: Colors.blue,
+      socialPink: Colors.pink,
+      socialRed: Colors.red,
+      shadowDark: _PrimitiveColor.opacity04,
+      shadowLight: _PrimitiveColor.opacity10,
+      shadowMedium: _PrimitiveColor.opacity20,
+      borderGrey: _PrimitiveColor.grey400,
+      borderLight: _PrimitiveColor.grey50,
+      iconGrey: _PrimitiveColor.grey700,
+      iconLightGrey: _PrimitiveColor.grey600,
     );
   }
 
   final Color backgroundPrimary;
   final Color backgroundSecondary;
-
   final Color textPrimary;
   final Color textSecondary;
-
-  final Color cardPrimary;
-  final Color cardSecondary;
-
-  final Color pillPrimary;
-  final Color pillSecondary;
+  final Color cardYellow;
+  final Color cardBlue;
+  final Color cardOrange;
+  final Color cardTeal;
+  final Color cardRed;
+  final Color pillGreen;
+  final Color pillOrange;
+  final Color metricBackgroundGreen;
+  final Color metricBackgroundBlue;
+  final Color metricBackgroundOrange;
+  final Color bottomNavigationBackground;
+  final Color difficultyEasy;
+  final Color difficultyMedium;
+  final Color difficultyHard;
+  final Color socialPink;
+  final Color socialRed;
+  final Color socialBlue;
+  final Color shadowLight;
+  final Color shadowMedium;
+  final Color shadowDark;
+  final Color borderLight;
+  final Color borderGrey;
+  final Color iconGrey;
+  final Color iconLightGrey;
 
   @override
   ThemeExtension<SemanticColor> copyWith({
@@ -61,18 +130,60 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
     Color? textSecondary,
     Color? cardPrimary,
     Color? cardSecondary,
-    Color? pillPrimary,
-    Color? pillSecondary,
+    Color? cardYellow,
+    Color? cardBlue,
+    Color? cardOrange,
+    Color? cardTeal,
+    Color? cardRed,
+    Color? pillGreen,
+    Color? pillOrange,
+    Color? metricBackgroundGreen,
+    Color? metricBackgroundBlue,
+    Color? metricBackgroundOrange,
+    Color? bottomNavigationBackground,
+    Color? difficultyEasy,
+    Color? difficultyMedium,
+    Color? difficultyHard,
+    Color? socialPink,
+    Color? socialRed,
+    Color? socialBlue,
+    Color? shadowLight,
+    Color? shadowMedium,
+    Color? shadowDark,
+    Color? borderLight,
+    Color? borderGrey,
+    Color? iconGrey,
+    Color? iconLightGrey,
   }) {
     return SemanticColor(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
       backgroundSecondary: backgroundSecondary ?? this.backgroundSecondary,
       textPrimary: textPrimary ?? this.textPrimary,
       textSecondary: textSecondary ?? this.textSecondary,
-      cardPrimary: cardPrimary ?? this.cardPrimary,
-      cardSecondary: cardSecondary ?? this.cardSecondary,
-      pillPrimary: pillPrimary ?? this.pillPrimary,
-      pillSecondary: pillSecondary ?? this.pillSecondary,
+      cardYellow: cardYellow ?? this.cardYellow,
+      cardBlue: cardBlue ?? this.cardBlue,
+      cardOrange: cardOrange ?? this.cardOrange,
+      cardTeal: cardTeal ?? this.cardTeal,
+      cardRed: cardRed ?? this.cardRed,
+      pillGreen: pillGreen ?? this.pillGreen,
+      pillOrange: pillOrange ?? this.pillOrange,
+      metricBackgroundGreen: metricBackgroundGreen ?? this.metricBackgroundGreen,
+      metricBackgroundBlue: metricBackgroundBlue ?? this.metricBackgroundBlue,
+      metricBackgroundOrange: metricBackgroundOrange ?? this.metricBackgroundOrange,
+      bottomNavigationBackground: bottomNavigationBackground ?? this.bottomNavigationBackground,
+      difficultyEasy: difficultyEasy ?? this.difficultyEasy,
+      difficultyMedium: difficultyMedium ?? this.difficultyMedium,
+      difficultyHard: difficultyHard ?? this.difficultyHard,
+      socialBlue: socialBlue ?? this.socialBlue,
+      socialPink: socialPink ?? this.socialPink,
+      socialRed: socialRed ?? this.socialRed,
+      shadowLight: shadowLight ?? this.shadowLight,
+      shadowMedium: shadowMedium ?? this.shadowMedium,
+      shadowDark: shadowDark ?? this.shadowDark,
+      borderLight: borderLight ?? this.borderLight,
+      borderGrey: borderGrey ?? this.borderGrey,
+      iconGrey: iconGrey ?? this.iconGrey,
+      iconLightGrey: iconLightGrey ?? this.iconLightGrey,
     );
   }
 
@@ -86,10 +197,57 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
           Color.lerp(backgroundSecondary, other.backgroundSecondary, t) ?? backgroundSecondary,
       textPrimary: Color.lerp(textPrimary, other.textPrimary, t) ?? textPrimary,
       textSecondary: Color.lerp(textSecondary, other.textSecondary, t) ?? textSecondary,
-      cardPrimary: Color.lerp(cardPrimary, other.cardPrimary, t) ?? cardPrimary,
-      cardSecondary: Color.lerp(cardSecondary, other.cardSecondary, t) ?? cardSecondary,
-      pillPrimary: Color.lerp(pillPrimary, other.pillPrimary, t) ?? pillPrimary,
-      pillSecondary: Color.lerp(pillSecondary, other.pillSecondary, t) ?? pillSecondary,
+      cardYellow: Color.lerp(cardYellow, other.cardYellow, t) ?? cardYellow,
+      cardBlue: Color.lerp(cardBlue, other.cardBlue, t) ?? cardBlue,
+      cardOrange: Color.lerp(cardOrange, other.cardOrange, t) ?? cardOrange,
+      cardTeal: Color.lerp(cardTeal, other.cardTeal, t) ?? cardTeal,
+      cardRed: Color.lerp(cardRed, other.cardRed, t) ?? cardRed,
+      pillGreen: Color.lerp(pillGreen, other.pillGreen, t) ?? pillGreen,
+      pillOrange: Color.lerp(pillOrange, other.pillOrange, t) ?? pillOrange,
+      metricBackgroundGreen:
+          Color.lerp(metricBackgroundGreen, other.metricBackgroundGreen, t) ??
+          metricBackgroundGreen,
+      metricBackgroundBlue:
+          Color.lerp(metricBackgroundBlue, other.metricBackgroundBlue, t) ?? metricBackgroundBlue,
+      metricBackgroundOrange:
+          Color.lerp(metricBackgroundOrange, other.metricBackgroundOrange, t) ??
+          metricBackgroundOrange,
+      bottomNavigationBackground:
+          Color.lerp(bottomNavigationBackground, other.bottomNavigationBackground, t) ??
+          bottomNavigationBackground,
+      difficultyEasy: Color.lerp(difficultyEasy, other.difficultyEasy, t) ?? difficultyEasy,
+      difficultyMedium: Color.lerp(difficultyMedium, other.difficultyMedium, t) ?? difficultyMedium,
+      difficultyHard: Color.lerp(difficultyHard, other.difficultyHard, t) ?? difficultyHard,
+      socialBlue: Color.lerp(socialBlue, other.socialBlue, t) ?? socialBlue,
+      socialPink: Color.lerp(socialPink, other.socialPink, t) ?? socialPink,
+      socialRed: Color.lerp(socialRed, other.socialRed, t) ?? socialRed,
+      shadowLight: Color.lerp(shadowLight, other.shadowLight, t) ?? shadowLight,
+      shadowMedium: Color.lerp(shadowMedium, other.shadowMedium, t) ?? shadowMedium,
+      shadowDark: Color.lerp(shadowDark, other.shadowDark, t) ?? shadowDark,
+      borderLight: Color.lerp(borderLight, other.borderLight, t) ?? borderLight,
+      borderGrey: Color.lerp(borderGrey, other.borderGrey, t) ?? borderGrey,
+      iconGrey: Color.lerp(iconGrey, other.iconGrey, t) ?? iconGrey,
+      iconLightGrey: Color.lerp(iconLightGrey, other.iconLightGrey, t) ?? iconLightGrey,
     );
+  }
+}
+
+class SemanticGradient extends ThemeExtension<SemanticGradient> {
+  const SemanticGradient();
+  factory SemanticGradient.regular() {
+    return const SemanticGradient();
+  }
+
+  @override
+  ThemeExtension<SemanticGradient> copyWith() {
+    throw UnimplementedError();
+  }
+
+  @override
+  ThemeExtension<SemanticGradient> lerp(
+    covariant ThemeExtension<SemanticGradient>? other,
+    double t,
+  ) {
+    throw UnimplementedError();
   }
 }
