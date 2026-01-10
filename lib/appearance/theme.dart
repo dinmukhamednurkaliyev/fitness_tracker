@@ -11,7 +11,6 @@ ThemeData buildTheme() {
       SemanticColor.regular,
       SemanticGradient.regular,
       SemanticSpacing.regular,
-      SemanticPadding.regular,
       SemanticRadius.regular,
     ],
   );
@@ -25,7 +24,9 @@ ThemeData buildTheme() {
     cardTheme: CardThemeData(
       elevation: 10,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(SemanticRadius.regular.md)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(SemanticRadius.regular.md),
+        ),
       ),
     ),
   );
@@ -39,7 +40,6 @@ extension ThemeContextExtension on BuildContext {
   SemanticColor get color => theme.extension<SemanticColor>()!;
   SemanticText get text => theme.extension<SemanticText>()!;
   SemanticSpacing get spacing => theme.extension<SemanticSpacing>()!;
-  SemanticPadding get padding => theme.extension<SemanticPadding>()!;
   SemanticRadius get radius => theme.extension<SemanticRadius>()!;
   SemanticGradient get gradient => theme.extension<SemanticGradient>()!;
 }
