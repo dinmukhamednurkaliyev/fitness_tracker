@@ -1,5 +1,5 @@
 {
-    "search.exclude": {
+  "search.exclude": {
     "**/.fvm": true,
     "**/.git": true,
     "**/.dart_tool": true,
@@ -11,6 +11,8 @@
     "**/*.config.dart": true
   },
   "files.watcherExclude": {
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/.dart_tool/**": true,
@@ -18,5 +20,9 @@
     "**/.pub-cache/**": true,
     "**/ios/Pods/**": true
   },
-  "conventionalCommits.scopes": ["ci"]
+  "explorer.fileNesting.patterns": {
+    "pubspec.yaml": "pubspec.lock, pubspec_overrides.yaml, .packages",
+    "*.dart": "${capture}.freezed.dart, ${capture}.g.dart, ${capture}.gr.dart",
+    ".env": ".env.example, .env.local"
+  },
 }
