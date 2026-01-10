@@ -10,14 +10,16 @@ GoRouter buildRouter() {
     initialLocation: '/home',
     routes: [
       StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) => BottomNavigationScaffold(shell: shell),
+        builder: (context, state, shell) =>
+            BottomNavigationScaffold(shell: shell),
         branches: [
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/home',
                 name: 'home',
-                pageBuilder: (context, state) => const NoTransitionPage(child: HomePage()),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: HomePage()),
               ),
             ],
           ),
@@ -26,7 +28,8 @@ GoRouter buildRouter() {
               GoRoute(
                 path: '/session',
                 name: 'session',
-                pageBuilder: (context, state) => const NoTransitionPage(child: SessionPage()),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SessionPage()),
               ),
             ],
           ),
@@ -35,7 +38,8 @@ GoRouter buildRouter() {
               GoRoute(
                 path: '/profile',
                 name: 'profile',
-                pageBuilder: (context, state) => const NoTransitionPage(child: ProfilePage()),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: ProfilePage()),
               ),
             ],
           ),
@@ -60,7 +64,7 @@ class BottomNavigationScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = context.color;
-    final padding = context.padding;
+    final spacing = context.spacing;
     final radius = context.radius;
     return Scaffold(
       body: shell,
@@ -68,12 +72,12 @@ class BottomNavigationScaffold extends StatelessWidget {
         height: 100,
         child: Container(
           margin: EdgeInsets.only(
-            bottom: padding.xxl,
-            top: padding.xxs,
-            left: padding.xxl,
-            right: padding.xxl,
+            bottom: spacing.xxl,
+            top: spacing.xxs,
+            left: spacing.xxl,
+            right: spacing.xxl,
           ),
-          padding: EdgeInsets.symmetric(vertical: padding.xxs),
+          padding: EdgeInsets.symmetric(vertical: spacing.xxs),
           decoration: BoxDecoration(
             color: color.bottomNavigationBackground,
             borderRadius: BorderRadius.circular(radius.xxxl),
