@@ -124,12 +124,12 @@ class _NavigationItem extends StatelessWidget {
         width: 56,
         height: 56,
         decoration: BoxDecoration(
-          color: isSelected ? color.backgroundPrimary : Colors.transparent,
+          color: isSelected ? color.backgroundWhite : Colors.transparent,
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
-          color: isSelected ? color.backgroundSecondary : color.backgroundPrimary,
+          color: isSelected ? color.backgroundBlack : color.backgroundWhite,
           size: 24,
         ),
       ),
