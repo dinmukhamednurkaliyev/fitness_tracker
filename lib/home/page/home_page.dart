@@ -53,7 +53,7 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
               name: userName,
             ),
           ),
-          const _SearchButton(),
+          const SearchButton(),
         ],
       ),
     );
@@ -61,36 +61,6 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(_headerHeight);
-}
-
-class _SearchButton extends StatelessWidget {
-  const _SearchButton();
-
-  @override
-  Widget build(BuildContext context) {
-    final color = context.color;
-    final radius = context.radius;
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: color.backgroundPrimary,
-        borderRadius: BorderRadius.circular(radius.xs),
-        boxShadow: [
-          BoxShadow(
-            color: color.shadowLight,
-            blurRadius: radius.xs,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Icon(
-        Icons.search,
-        color: color.iconGrey,
-        size: 20,
-      ),
-    );
-  }
 }
 
 class HomeBody extends StatefulWidget {
@@ -119,6 +89,7 @@ class _HomeBodyState extends State<HomeBody> {
               }),
             ),
             const HomeWorkoutPlanSection(),
+            const HomeSocialMediaSection(),
           ],
         ),
       ),
