@@ -3,7 +3,12 @@ import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
 
 class HomeDailyChallengeSection extends StatelessWidget {
-  const HomeDailyChallengeSection({super.key});
+  const HomeDailyChallengeSection({
+    required this.challengeParticipants,
+    super.key,
+  });
+
+  final List<String> challengeParticipants;
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +45,10 @@ class HomeDailyChallengeSection extends StatelessWidget {
                   'Do your plan before 09:00 AM',
                   style: text.labelLarge.withColor(color.textSecondary),
                 ),
-                const Row(
+                Row(
                   children: [
                     AvatarStack(
-                      urls: [
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                      ],
+                      urls: challengeParticipants,
                     ),
                   ],
                 ),

@@ -5,57 +5,44 @@ import 'package:go_router/go_router.dart';
 
 class HomeWorkoutPlanSection extends StatelessWidget {
   const HomeWorkoutPlanSection({
+    required this.workoutPlans,
     super.key,
   });
+
+  final List<WorkoutPlan> workoutPlans;
 
   @override
   Widget build(BuildContext context) {
     final spacing = context.spacing;
-    final color = context.color;
     return SizedBox(
       height: 200,
-      child: Row(
-        spacing: spacing.sm,
-        children: [
-          Expanded(
-            child: WorkoutCard(
-              plan: WorkoutPlan(
-                title: 'Yoga Group',
-                difficulty: 'Medium',
-                date: '25 Nov.',
-                time: '14:00-15:00',
-                room: 'A5 room',
-                trainerName: 'Kellie Jetton',
-                trainerImage:
-                    'https://images.unsplash.com/photo-1549351236-caca0f174515?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                backgroundColor: color.cardYellow,
-              ),
-              isLeft: true,
-              onTap: () {
-                context.go('/session-detail');
-              },
-            ),
-          ),
-          Expanded(
-            child: WorkoutCard(
-              plan: WorkoutPlan(
-                title: 'Cardio Group',
-                difficulty: 'Hard',
-                date: '28 Nov.',
-                time: '10:00-11:00',
-                room: 'A3 room',
-                trainerName: 'Loretta Waller',
-                trainerImage:
-                    'https://images.unsplash.com/photo-1635328372330-757aa2e61d57?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                backgroundColor: color.cardBlue,
-              ),
-              isLeft: false,
-              onTap: () {
-                context.go('/session-detail');
-              },
-            ),
-          ),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          const count = 2;
+          final totalSpacing = spacing.sm * (count - 1);
+          final itemWidth = (constraints.maxWidth - totalSpacing) / count;
+
+          return ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: workoutPlans.length,
+            separatorBuilder: (context, index) => SizedBox(width: spacing.sm),
+            itemBuilder: (context, index) {
+              final plan = workoutPlans[index];
+              // Simple logic to alternate "Left/Right" style layout if that's what isLeft implied
+              // Or we can just default to one style. For now, alternating for variety.
+              return SizedBox(
+                width: itemWidth,
+                child: WorkoutCard(
+                  plan: plan,
+                  isLeft: index.isEven,
+                  onTap: () {
+                    context.go('/session-detail');
+                  },
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

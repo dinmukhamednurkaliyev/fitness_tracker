@@ -75,20 +75,59 @@ class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     final spacing = context.spacing;
+    final color = context.color;
+
+    // In a real app, this would likely come from a BLoC or Provider
+    final challengeParticipants = [
+      'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+    ];
+
+    final workoutPlans = [
+      WorkoutPlan(
+        title: 'Yoga Group',
+        difficulty: 'Medium',
+        date: '25 Nov.',
+        time: '14:00-15:00',
+        room: 'A5 room',
+        trainerName: 'Kellie Jetton',
+        trainerImage:
+            'https://images.unsplash.com/photo-1549351236-caca0f174515?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        backgroundColor: color.cardYellow,
+      ),
+      WorkoutPlan(
+        title: 'Cardio Group',
+        difficulty: 'Hard',
+        date: '28 Nov.',
+        time: '10:00-11:00',
+        room: 'A3 room',
+        trainerName: 'Loretta Waller',
+        trainerImage:
+            'https://images.unsplash.com/photo-1635328372330-757aa2e61d57?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        backgroundColor: color.cardBlue,
+      ),
+    ];
+
     return Padding(
       padding: EdgeInsets.all(spacing.sm),
       child: SingleChildScrollView(
         child: Column(
           spacing: spacing.sm,
           children: [
-            const HomeDailyChallengeSection(),
+            HomeDailyChallengeSection(
+              challengeParticipants: challengeParticipants,
+            ),
             HomeScheduleSection(
               selectedDate: selectedDate,
               onDateSelected: (date) => setState(() {
                 selectedDate = date;
               }),
             ),
-            const HomeWorkoutPlanSection(),
+            HomeWorkoutPlanSection(
+              workoutPlans: workoutPlans,
+            ),
             const HomeSocialMediaSection(),
           ],
         ),

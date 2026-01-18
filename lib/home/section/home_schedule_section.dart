@@ -6,10 +6,12 @@ class HomeScheduleSection extends StatelessWidget {
   const HomeScheduleSection({
     required this.selectedDate,
     required this.onDateSelected,
+    this.startDate,
     super.key,
   });
 
   final DateTime selectedDate;
+  final DateTime? startDate;
   final void Function(DateTime) onDateSelected;
 
   @override
@@ -17,15 +19,18 @@ class HomeScheduleSection extends StatelessWidget {
     final spacing = context.spacing;
     final color = context.color;
     final radius = context.radius;
-    final now = DateTime.now();
-    final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+
+    final effectiveStartDate =
+        startDate ??
+        selectedDate.subtract(Duration(days: selectedDate.weekday - 1));
+
     return SizedBox(
       height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 7,
         itemBuilder: (context, index) {
-          final date = startOfWeek.add(Duration(days: index));
+          final date = effectiveStartDate.add(Duration(days: index));
           final isSelected =
               date.day == selectedDate.day &&
               date.month == selectedDate.month &&
@@ -33,7 +38,7 @@ class HomeScheduleSection extends StatelessWidget {
           return GestureDetector(
             onTap: () => onDateSelected(date),
             child: Container(
-              width: 50,
+              width: spacing.xxl + spacing.sm,
               margin: EdgeInsets.only(right: spacing.xxxs),
               decoration: BoxDecoration(
                 color: isSelected
