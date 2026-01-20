@@ -2,6 +2,17 @@ import 'package:fitness_tracker_application/appearance/appearance.dart';
 import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
 
+@immutable
+class SocialMediaItem {
+  const SocialMediaItem({
+    required this.icon,
+    required this.color,
+  });
+
+  final IconData icon;
+  final Color color;
+}
+
 class HomeSocialMediaSection extends StatelessWidget {
   const HomeSocialMediaSection({super.key});
 

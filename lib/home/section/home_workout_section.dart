@@ -3,13 +3,35 @@ import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+@immutable
+class WorkoutPlanItem {
+  const WorkoutPlanItem({
+    required this.title,
+    required this.difficulty,
+    required this.date,
+    required this.time,
+    required this.room,
+    required this.trainerName,
+    required this.trainerImage,
+    required this.backgroundColor,
+  });
+  final String title;
+  final String difficulty;
+  final String date;
+  final String time;
+  final String room;
+  final String trainerName;
+  final String trainerImage;
+  final Color backgroundColor;
+}
+
 class HomeWorkoutPlanSection extends StatelessWidget {
   const HomeWorkoutPlanSection({
     required this.workoutPlans,
     super.key,
   });
 
-  final List<WorkoutPlan> workoutPlans;
+  final List<WorkoutPlanItem> workoutPlans;
 
   @override
   Widget build(BuildContext context) {
