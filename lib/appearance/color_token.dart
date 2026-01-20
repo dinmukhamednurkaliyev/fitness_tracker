@@ -30,7 +30,6 @@ class _PrimitiveColor {
 @immutable
 class SemanticColor extends ThemeExtension<SemanticColor> {
   const SemanticColor({
-    required this.text,
     required this.iconGrey,
     required this.iconLightGrey,
     required this.borderGrey,
@@ -55,6 +54,8 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
     required this.cardRed,
     required this.cardTeal,
     required this.cardYellow,
+    required this.text,
+    required this.textWhite,
     required this.textPrimary,
     required this.textSecondary,
     required this.backgroundPrimary,
@@ -64,6 +65,7 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
 
   static const regular = SemanticColor(
     text: _PrimitiveColor.grey900,
+    textWhite: Colors.white,
     textPrimary: _PrimitiveColor.grey800,
     textSecondary: _PrimitiveColor.grey700,
     backgroundPrimary: _PrimitiveColor.grey50,
@@ -99,6 +101,7 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
   final Color backgroundBlack;
   final Color backgroundWhite;
   final Color text;
+  final Color textWhite;
   final Color textPrimary;
   final Color textSecondary;
   final Color cardYellow;
@@ -132,6 +135,7 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
     Color? backgroundBlack,
     Color? backgroundWhite,
     Color? text,
+    Color? textWhite,
     Color? textPrimary,
     Color? textSecondary,
     Color? cardPrimary,
@@ -166,6 +170,7 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
       backgroundBlack: backgroundBlack ?? this.backgroundBlack,
       backgroundWhite: backgroundWhite ?? this.backgroundWhite,
       text: text ?? this.text,
+      textWhite: textWhite ?? this.textWhite,
       textPrimary: textPrimary ?? this.textPrimary,
       textSecondary: textSecondary ?? this.textSecondary,
       cardYellow: cardYellow ?? this.cardYellow,
@@ -175,10 +180,13 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
       cardRed: cardRed ?? this.cardRed,
       pillGreen: pillGreen ?? this.pillGreen,
       pillOrange: pillOrange ?? this.pillOrange,
-      metricBackgroundGreen: metricBackgroundGreen ?? this.metricBackgroundGreen,
+      metricBackgroundGreen:
+          metricBackgroundGreen ?? this.metricBackgroundGreen,
       metricBackgroundBlue: metricBackgroundBlue ?? this.metricBackgroundBlue,
-      metricBackgroundOrange: metricBackgroundOrange ?? this.metricBackgroundOrange,
-      bottomNavigationBackground: bottomNavigationBackground ?? this.bottomNavigationBackground,
+      metricBackgroundOrange:
+          metricBackgroundOrange ?? this.metricBackgroundOrange,
+      bottomNavigationBackground:
+          bottomNavigationBackground ?? this.bottomNavigationBackground,
       difficultyEasy: difficultyEasy ?? this.difficultyEasy,
       difficultyMedium: difficultyMedium ?? this.difficultyMedium,
       difficultyHard: difficultyHard ?? this.difficultyHard,
@@ -196,16 +204,26 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
   }
 
   @override
-  ThemeExtension<SemanticColor> lerp(covariant ThemeExtension<SemanticColor>? other, double t) {
+  ThemeExtension<SemanticColor> lerp(
+    covariant ThemeExtension<SemanticColor>? other,
+    double t,
+  ) {
     if (other is! SemanticColor) return this;
     return SemanticColor(
       backgroundPrimary:
-          Color.lerp(backgroundPrimary, other.backgroundPrimary, t) ?? backgroundPrimary,
-      backgroundBlack: Color.lerp(backgroundBlack, other.backgroundBlack, t) ?? backgroundBlack,
-      backgroundWhite: Color.lerp(backgroundWhite, other.backgroundWhite, t) ?? backgroundWhite,
+          Color.lerp(backgroundPrimary, other.backgroundPrimary, t) ??
+          backgroundPrimary,
+      backgroundBlack:
+          Color.lerp(backgroundBlack, other.backgroundBlack, t) ??
+          backgroundBlack,
+      backgroundWhite:
+          Color.lerp(backgroundWhite, other.backgroundWhite, t) ??
+          backgroundWhite,
       text: Color.lerp(text, other.text, t) ?? text,
+      textWhite: Color.lerp(textWhite, other.textWhite, t) ?? textWhite,
       textPrimary: Color.lerp(textPrimary, other.textPrimary, t) ?? textPrimary,
-      textSecondary: Color.lerp(textSecondary, other.textSecondary, t) ?? textSecondary,
+      textSecondary:
+          Color.lerp(textSecondary, other.textSecondary, t) ?? textSecondary,
       cardYellow: Color.lerp(cardYellow, other.cardYellow, t) ?? cardYellow,
       cardBlue: Color.lerp(cardBlue, other.cardBlue, t) ?? cardBlue,
       cardOrange: Color.lerp(cardOrange, other.cardOrange, t) ?? cardOrange,
@@ -217,26 +235,37 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
           Color.lerp(metricBackgroundGreen, other.metricBackgroundGreen, t) ??
           metricBackgroundGreen,
       metricBackgroundBlue:
-          Color.lerp(metricBackgroundBlue, other.metricBackgroundBlue, t) ?? metricBackgroundBlue,
+          Color.lerp(metricBackgroundBlue, other.metricBackgroundBlue, t) ??
+          metricBackgroundBlue,
       metricBackgroundOrange:
           Color.lerp(metricBackgroundOrange, other.metricBackgroundOrange, t) ??
           metricBackgroundOrange,
       bottomNavigationBackground:
-          Color.lerp(bottomNavigationBackground, other.bottomNavigationBackground, t) ??
+          Color.lerp(
+            bottomNavigationBackground,
+            other.bottomNavigationBackground,
+            t,
+          ) ??
           bottomNavigationBackground,
-      difficultyEasy: Color.lerp(difficultyEasy, other.difficultyEasy, t) ?? difficultyEasy,
-      difficultyMedium: Color.lerp(difficultyMedium, other.difficultyMedium, t) ?? difficultyMedium,
-      difficultyHard: Color.lerp(difficultyHard, other.difficultyHard, t) ?? difficultyHard,
+      difficultyEasy:
+          Color.lerp(difficultyEasy, other.difficultyEasy, t) ?? difficultyEasy,
+      difficultyMedium:
+          Color.lerp(difficultyMedium, other.difficultyMedium, t) ??
+          difficultyMedium,
+      difficultyHard:
+          Color.lerp(difficultyHard, other.difficultyHard, t) ?? difficultyHard,
       socialBlue: Color.lerp(socialBlue, other.socialBlue, t) ?? socialBlue,
       socialPink: Color.lerp(socialPink, other.socialPink, t) ?? socialPink,
       socialRed: Color.lerp(socialRed, other.socialRed, t) ?? socialRed,
       shadowLight: Color.lerp(shadowLight, other.shadowLight, t) ?? shadowLight,
-      shadowMedium: Color.lerp(shadowMedium, other.shadowMedium, t) ?? shadowMedium,
+      shadowMedium:
+          Color.lerp(shadowMedium, other.shadowMedium, t) ?? shadowMedium,
       shadowDark: Color.lerp(shadowDark, other.shadowDark, t) ?? shadowDark,
       borderLight: Color.lerp(borderLight, other.borderLight, t) ?? borderLight,
       borderGrey: Color.lerp(borderGrey, other.borderGrey, t) ?? borderGrey,
       iconGrey: Color.lerp(iconGrey, other.iconGrey, t) ?? iconGrey,
-      iconLightGrey: Color.lerp(iconLightGrey, other.iconLightGrey, t) ?? iconLightGrey,
+      iconLightGrey:
+          Color.lerp(iconLightGrey, other.iconLightGrey, t) ?? iconLightGrey,
     );
   }
 }
@@ -274,7 +303,10 @@ class SemanticGradient extends ThemeExtension<SemanticGradient> {
   ) {
     if (other is! SemanticGradient) return this;
     return SemanticGradient(
-      challengeCard: Gradient.lerp(challengeCard, other.challengeCard, t) ?? challengeCard,
+      challengeCard:
+          Gradient.lerp(challengeCard, other.challengeCard, t) ?? challengeCard,
     );
   }
 }
+
+extension ColorExtension on Color {}

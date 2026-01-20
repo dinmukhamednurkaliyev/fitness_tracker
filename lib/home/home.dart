@@ -1,1 +1,11 @@
-export 'home_page.dart';
+export 'page/home_page.dart';
+export 'section/home_daily_challenge_section.dart';
+export 'section/home_schedule_section.dart';
+export 'section/home_social_media_section.dart';
+export 'section/home_workout_section.dart';
+export 'widget/search_button.dart';
+export 'widget/social_media_card.dart';
+export 'widget/social_media_icon.dart';
+export 'widget/user_avatar.dart';
+export 'widget/user_greeting.dart';
+export 'widget/workout_card.dart';
