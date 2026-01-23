@@ -1,16 +1,37 @@
 import 'package:fitness_tracker_application/appearance/appearance.dart';
-import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
+
+@immutable
+class WorkoutCardItem {
+  const WorkoutCardItem({
+    required this.title,
+    required this.difficulty,
+    required this.date,
+    required this.time,
+    required this.room,
+    required this.trainerName,
+    required this.trainerImage,
+    required this.backgroundColor,
+  });
+  final String title;
+  final String difficulty;
+  final String date;
+  final String time;
+  final String room;
+  final String trainerName;
+  final String trainerImage;
+  final Color backgroundColor;
+}
 
 class WorkoutCard extends StatelessWidget {
   const WorkoutCard({
-    required this.plan,
+    required this.item,
     required this.isLeft,
     required this.onTap,
     super.key,
   });
 
-  final WorkoutPlanItem plan;
+  final WorkoutCardItem item;
   final bool isLeft;
   final VoidCallback onTap;
 
@@ -24,7 +45,7 @@ class WorkoutCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: plan.backgroundColor,
+          color: item.backgroundColor,
           borderRadius: BorderRadius.circular(spacing.xs),
           boxShadow: [
             BoxShadow(
@@ -49,25 +70,25 @@ class WorkoutCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(spacing.xxxs),
                 ),
                 child: Text(
-                  plan.difficulty,
+                  item.difficulty,
                   style: text.bodySmall.withColor(color.textPrimary),
                 ),
               ),
               SizedBox(height: spacing.xxs),
 
               Text(
-                plan.date,
+                item.date,
                 style: text.bodySmall.withColor(color.textSecondary),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                plan.time,
+                item.time,
                 style: text.bodySmall.withColor(color.textSecondary),
                 maxLines: 1,
               ),
               Text(
-                plan.room,
+                item.room,
                 style: text.bodySmall.withColor(color.textSecondary),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -80,7 +101,7 @@ class WorkoutCard extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: spacing.xs,
-                      backgroundImage: NetworkImage(plan.trainerImage),
+                      backgroundImage: NetworkImage(item.trainerImage),
                       backgroundColor: color.backgroundWhite.withValues(
                         alpha: 0.5,
                       ),
@@ -99,7 +120,7 @@ class WorkoutCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            plan.trainerName,
+                            item.trainerName,
                             style: text.bodySmall.withColor(color.textPrimary),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

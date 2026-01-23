@@ -77,7 +77,6 @@ class _HomeBodyState extends State<HomeBody> {
     final spacing = context.spacing;
     final color = context.color;
 
-    // In a real app, this would likely come from a BLoC or Provider
     final challengeParticipants = [
       'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
       'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
@@ -85,8 +84,8 @@ class _HomeBodyState extends State<HomeBody> {
       'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
     ];
 
-    final workoutPlans = [
-      WorkoutPlanItem(
+    final workoutCardItem = [
+      WorkoutCardItem(
         title: 'Yoga Group',
         difficulty: 'Medium',
         date: '25 Nov.',
@@ -97,7 +96,7 @@ class _HomeBodyState extends State<HomeBody> {
             'https://images.unsplash.com/photo-1549351236-caca0f174515?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         backgroundColor: color.cardYellow,
       ),
-      WorkoutPlanItem(
+      WorkoutCardItem(
         title: 'Cardio Group',
         difficulty: 'Hard',
         date: '28 Nov.',
@@ -107,6 +106,21 @@ class _HomeBodyState extends State<HomeBody> {
         trainerImage:
             'https://images.unsplash.com/photo-1635328372330-757aa2e61d57?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         backgroundColor: color.cardBlue,
+      ),
+    ];
+
+    final socialMediaItems = [
+      SocialMediaCardItem(
+        icon: Icons.camera_alt,
+        color: color.socialPink,
+      ),
+      SocialMediaCardItem(
+        icon: Icons.play_circle_outline,
+        color: color.socialRed,
+      ),
+      SocialMediaCardItem(
+        icon: Icons.chat_bubble_outline,
+        color: color.socialBlue,
       ),
     ];
 
@@ -125,10 +139,12 @@ class _HomeBodyState extends State<HomeBody> {
                 selectedDate = date;
               }),
             ),
-            HomeWorkoutPlanSection(
-              workoutPlans: workoutPlans,
+            HomeWorkoutSection(
+              item: workoutCardItem,
             ),
-            const HomeSocialMediaSection(),
+            HomeSocialMediaSection(
+              item: socialMediaItems,
+            ),
           ],
         ),
       ),
