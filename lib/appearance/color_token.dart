@@ -20,7 +20,7 @@ class _PrimitiveColor {
 
   static const Color blue100 = Color(0xFFBBD2FF);
   static const Color yellow400 = Color(0xFFFFC85D);
-  static const Color green50 = Color(0xFFE7F8ED);
+  static const Color green100 = Color(0xFFCFF2D8);
   static const Color orange100 = Color(0xFFFFEED6);
   static const Color orange700 = Color(0xFFFF6B35);
   static const Color red400 = Color(0xFFFF6B6B);
@@ -49,11 +49,11 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
     required this.metricBackgroundOrange,
     required this.pillGreen,
     required this.pillOrange,
-    required this.cardBlue,
-    required this.cardOrange,
-    required this.cardRed,
-    required this.cardTeal,
-    required this.cardYellow,
+    required this.cardBackgroundBlue,
+    required this.cardBackgroundOrange,
+    required this.cardBackgroundRed,
+    required this.cardBackgroundTeal,
+    required this.cardBackgroundYellow,
     required this.text,
     required this.textWhite,
     required this.textPrimary,
@@ -71,14 +71,14 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
     backgroundPrimary: _PrimitiveColor.grey50,
     backgroundBlack: Colors.black,
     backgroundWhite: Colors.white,
-    cardBlue: _PrimitiveColor.blue100,
-    cardOrange: _PrimitiveColor.orange700,
-    cardRed: _PrimitiveColor.red400,
-    cardTeal: _PrimitiveColor.teal400,
-    cardYellow: _PrimitiveColor.yellow400,
-    pillGreen: _PrimitiveColor.green50,
+    cardBackgroundBlue: _PrimitiveColor.blue100,
+    cardBackgroundOrange: _PrimitiveColor.orange700,
+    cardBackgroundRed: _PrimitiveColor.red400,
+    cardBackgroundTeal: _PrimitiveColor.teal400,
+    cardBackgroundYellow: _PrimitiveColor.yellow400,
+    pillGreen: _PrimitiveColor.green100,
     pillOrange: _PrimitiveColor.orange100,
-    metricBackgroundGreen: _PrimitiveColor.green50,
+    metricBackgroundGreen: _PrimitiveColor.green100,
     metricBackgroundBlue: _PrimitiveColor.blue100,
     metricBackgroundOrange: _PrimitiveColor.orange100,
     bottomNavigationBackground: Colors.black,
@@ -104,11 +104,11 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
   final Color textWhite;
   final Color textPrimary;
   final Color textSecondary;
-  final Color cardYellow;
-  final Color cardBlue;
-  final Color cardOrange;
-  final Color cardTeal;
-  final Color cardRed;
+  final Color cardBackgroundYellow;
+  final Color cardBackgroundBlue;
+  final Color cardBackgroundOrange;
+  final Color cardBackgroundTeal;
+  final Color cardBackgroundRed;
   final Color pillGreen;
   final Color pillOrange;
   final Color metricBackgroundGreen;
@@ -173,11 +173,11 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
       textWhite: textWhite ?? this.textWhite,
       textPrimary: textPrimary ?? this.textPrimary,
       textSecondary: textSecondary ?? this.textSecondary,
-      cardYellow: cardYellow ?? this.cardYellow,
-      cardBlue: cardBlue ?? this.cardBlue,
-      cardOrange: cardOrange ?? this.cardOrange,
-      cardTeal: cardTeal ?? this.cardTeal,
-      cardRed: cardRed ?? this.cardRed,
+      cardBackgroundYellow: cardYellow ?? cardBackgroundYellow,
+      cardBackgroundBlue: cardBlue ?? cardBackgroundBlue,
+      cardBackgroundOrange: cardOrange ?? cardBackgroundOrange,
+      cardBackgroundTeal: cardTeal ?? cardBackgroundTeal,
+      cardBackgroundRed: cardRed ?? cardBackgroundRed,
       pillGreen: pillGreen ?? this.pillGreen,
       pillOrange: pillOrange ?? this.pillOrange,
       metricBackgroundGreen:
@@ -224,11 +224,21 @@ class SemanticColor extends ThemeExtension<SemanticColor> {
       textPrimary: Color.lerp(textPrimary, other.textPrimary, t) ?? textPrimary,
       textSecondary:
           Color.lerp(textSecondary, other.textSecondary, t) ?? textSecondary,
-      cardYellow: Color.lerp(cardYellow, other.cardYellow, t) ?? cardYellow,
-      cardBlue: Color.lerp(cardBlue, other.cardBlue, t) ?? cardBlue,
-      cardOrange: Color.lerp(cardOrange, other.cardOrange, t) ?? cardOrange,
-      cardTeal: Color.lerp(cardTeal, other.cardTeal, t) ?? cardTeal,
-      cardRed: Color.lerp(cardRed, other.cardRed, t) ?? cardRed,
+      cardBackgroundYellow:
+          Color.lerp(cardBackgroundYellow, other.cardBackgroundYellow, t) ??
+          cardBackgroundYellow,
+      cardBackgroundBlue:
+          Color.lerp(cardBackgroundBlue, other.cardBackgroundBlue, t) ??
+          cardBackgroundBlue,
+      cardBackgroundOrange:
+          Color.lerp(cardBackgroundOrange, other.cardBackgroundOrange, t) ??
+          cardBackgroundOrange,
+      cardBackgroundTeal:
+          Color.lerp(cardBackgroundTeal, other.cardBackgroundTeal, t) ??
+          cardBackgroundTeal,
+      cardBackgroundRed:
+          Color.lerp(cardBackgroundRed, other.cardBackgroundRed, t) ??
+          cardBackgroundRed,
       pillGreen: Color.lerp(pillGreen, other.pillGreen, t) ?? pillGreen,
       pillOrange: Color.lerp(pillOrange, other.pillOrange, t) ?? pillOrange,
       metricBackgroundGreen:
@@ -308,5 +318,3 @@ class SemanticGradient extends ThemeExtension<SemanticGradient> {
     );
   }
 }
-
-extension ColorExtension on Color {}
