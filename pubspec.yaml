@@ -81,6 +81,12 @@ melos:
     fix:all:
       run: melos exec -c 10 -- "dart fix --apply"
       description: Apply automatic fixes in all packages.
+    test:golden:
+      run: melos exec -- "flutter test --isGolden=true"
+      description: Run all golden tests in the workspace.
+    test:golden:update:
+      run: melos exec -- "flutter test --update-goldens"
+      description: Update all golden master images.
     quality:check:
       run: |
         melos run format:check
