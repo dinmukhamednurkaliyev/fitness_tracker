@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 
 class SessionAvailableSection extends StatelessWidget {
   const SessionAvailableSection({
-    required this.item,
+    required this.sessions,
     super.key,
   });
 
-  final List<SessionCardItem> item;
+  final List<SessionCardData> sessions;
 
   @override
   Widget build(BuildContext context) {
-    final padding = context.spacing;
+    final spacing = context.spacing;
     final text = context.text;
     final color = context.color;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: padding.sm,
+      spacing: spacing.sm,
       children: [
         Text(
           'Available Sessions',
@@ -28,11 +28,11 @@ class SessionAvailableSection extends StatelessWidget {
           style: text.bodyLarge.withColor(color.textPrimary),
         ),
         Column(
-          spacing: padding.sm,
-          children: item
+          spacing: spacing.sm,
+          children: sessions
               .map(
                 (item) => SessionCard(
-                  item: item,
+                  session: item,
                   onTap: () {},
                 ),
               )

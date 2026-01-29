@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 ThemeData buildTheme() {
   final base = ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: SemanticColor.regular.cardBlue,
+    colorSchemeSeed: SemanticColor.regular.cardBackgroundBlue,
     textTheme: const TextTheme(),
     extensions: const <ThemeExtension<dynamic>>[
       SemanticText.regular,

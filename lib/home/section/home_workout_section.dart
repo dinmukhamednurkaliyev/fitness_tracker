@@ -5,11 +5,11 @@ import 'package:go_router/go_router.dart';
 
 class HomeWorkoutSection extends StatelessWidget {
   const HomeWorkoutSection({
-    required this.item,
+    required this.workouts,
     super.key,
   });
 
-  final List<WorkoutCardItem> item;
+  final List<WorkoutCardData> workouts;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,14 @@ class HomeWorkoutSection extends StatelessWidget {
 
           return ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: item.length,
+            itemCount: workouts.length,
             separatorBuilder: (context, index) => SizedBox(width: spacing.sm),
             itemBuilder: (context, index) {
-              final item = this.item[index];
+              final item = workouts[index];
               return SizedBox(
                 width: itemWidth,
                 child: WorkoutCard(
-                  item: item,
+                  workout: item,
                   isLeft: index.isEven,
                   onTap: () {
                     context.go('/session-detail');

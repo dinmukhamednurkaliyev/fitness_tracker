@@ -2,8 +2,8 @@ import 'package:fitness_tracker_application/appearance/appearance.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class SessionCardItem {
-  const SessionCardItem({
+class SessionCardData {
+  const SessionCardData({
     required this.backgroundColor,
     required this.calories,
     required this.description,
@@ -22,9 +22,9 @@ class SessionCardItem {
 }
 
 class SessionCard extends StatelessWidget {
-  const SessionCard({required this.item, required this.onTap, super.key});
+  const SessionCard({required this.session, required this.onTap, super.key});
 
-  final SessionCardItem item;
+  final SessionCardData session;
   final VoidCallback onTap;
 
   Color _getDifficultyColor(SemanticColor color, String difficulty) {
@@ -46,7 +46,7 @@ class SessionCard extends StatelessWidget {
     final color = context.color;
     final radius = context.radius;
     final text = context.text;
-    final difficultyColor = _getDifficultyColor(color, item.difficulty);
+    final difficultyColor = _getDifficultyColor(color, session.difficulty);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -66,7 +66,7 @@ class SessionCard extends StatelessWidget {
               width: 4,
               height: 80,
               decoration: BoxDecoration(
-                color: item.backgroundColor,
+                color: session.backgroundColor,
                 borderRadius: BorderRadius.circular(radius.xxxs),
               ),
             ),
@@ -79,7 +79,7 @@ class SessionCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        item.title,
+                        session.title,
                         style: text.bodyLarge.withColor(color.textPrimary),
                       ),
                       Container(
@@ -92,7 +92,7 @@ class SessionCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(spacing.xxxs),
                         ),
                         child: Text(
-                          item.difficulty,
+                          session.difficulty,
                           style: text.bodySmall.withColor(
                             difficultyColor,
                           ),
@@ -101,11 +101,11 @@ class SessionCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'Trainer: ${item.trainerName}',
+                    'Trainer: ${session.trainerName}',
                     style: text.bodySmall.withColor(color.textSecondary),
                   ),
                   Text(
-                    item.description,
+                    session.description,
                     style: text.bodySmall.withColor(color.textSecondary),
                   ),
                   Row(
@@ -113,11 +113,11 @@ class SessionCard extends StatelessWidget {
                     children: [
                       _InfoChip(
                         icon: Icons.access_time,
-                        title: item.duration,
+                        title: session.duration,
                       ),
                       _InfoChip(
                         icon: Icons.local_fire_department,
-                        title: item.calories,
+                        title: session.calories,
                       ),
                     ],
                   ),
@@ -128,13 +128,13 @@ class SessionCard extends StatelessWidget {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: item.backgroundColor.withValues(alpha: 0.1),
+                color: session.backgroundColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(radius.sm),
               ),
               child: Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
-                color: item.backgroundColor,
+                color: session.backgroundColor,
               ),
             ),
           ],

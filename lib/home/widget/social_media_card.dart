@@ -1,47 +1,30 @@
-import 'package:fitness_tracker_application/appearance/appearance.dart';
 import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class SocialMediaCardItem {
-  const SocialMediaCardItem({
+class SocialMediaCardData {
+  const SocialMediaCardData({
     required this.icon,
-    required this.color,
+    required this.backgroundColor,
   });
 
   final IconData icon;
-  final Color color;
+  final Color backgroundColor;
 }
 
 class SocialMediaCard extends StatelessWidget {
   const SocialMediaCard({
-    required this.items,
+    required this.social,
     super.key,
   });
 
-  final List<SocialMediaCardItem> items;
+  final SocialMediaCardData social;
 
   @override
   Widget build(BuildContext context) {
-    final spacing = context.spacing;
-    final radius = context.radius;
-
-    return Container(
-      padding: EdgeInsets.all(spacing.sm),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius.sm),
-      ),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        spacing: spacing.md,
-        runSpacing: spacing.sm,
-        children: items.map((item) {
-          return SocialMediaIcon(
-            icon: item.icon,
-            iconColor: item.color,
-          );
-        }).toList(),
-      ),
+    return SocialMediaIcon(
+      icon: social.icon,
+      iconColor: social.backgroundColor,
     );
   }
 }

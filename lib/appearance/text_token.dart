@@ -10,7 +10,7 @@ class _TextPrimitive {
   static const FontWeight regular = FontWeight.w400;
   static const FontWeight medium = FontWeight.w500;
   static const FontWeight semiBold = FontWeight.w600;
-  //static const FontWeight bold = FontWeight.w700;
+  static const FontWeight bold = FontWeight.w700;
 
   static const double s11 = 11;
   static const double s12 = 12;
@@ -111,14 +111,14 @@ class SemanticText extends ThemeExtension<SemanticText> {
       fontFamily: _TextPrimitive.fontFamily,
       leadingDistribution: _TextPrimitive.leading,
       fontSize: _TextPrimitive.s22,
-      fontWeight: _TextPrimitive.semiBold,
+      fontWeight: _TextPrimitive.bold,
       height: 1.27,
     ),
     titleMedium: TextStyle(
       fontFamily: _TextPrimitive.fontFamily,
       leadingDistribution: _TextPrimitive.leading,
       fontSize: _TextPrimitive.s16,
-      fontWeight: _TextPrimitive.semiBold,
+      fontWeight: _TextPrimitive.bold,
       height: 1.5,
       letterSpacing: 0.15,
     ),
@@ -126,7 +126,7 @@ class SemanticText extends ThemeExtension<SemanticText> {
       fontFamily: _TextPrimitive.fontFamily,
       leadingDistribution: _TextPrimitive.leading,
       fontSize: _TextPrimitive.s14,
-      fontWeight: _TextPrimitive.medium,
+      fontWeight: _TextPrimitive.bold,
       height: 1.43,
       letterSpacing: 0.1,
     ),

@@ -82,10 +82,16 @@ class _HomeBodyState extends State<HomeBody> {
       'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
       'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
       'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60',
     ];
 
     final workoutCardItem = [
-      WorkoutCardItem(
+      WorkoutCardData(
         title: 'Yoga Group',
         difficulty: 'Medium',
         date: '25 Nov.',
@@ -94,9 +100,9 @@ class _HomeBodyState extends State<HomeBody> {
         trainerName: 'Kellie Jetton',
         trainerImage:
             'https://images.unsplash.com/photo-1549351236-caca0f174515?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        backgroundColor: color.cardYellow,
+        backgroundColor: color.cardBackgroundYellow,
       ),
-      WorkoutCardItem(
+      WorkoutCardData(
         title: 'Cardio Group',
         difficulty: 'Hard',
         date: '28 Nov.',
@@ -105,48 +111,46 @@ class _HomeBodyState extends State<HomeBody> {
         trainerName: 'Loretta Waller',
         trainerImage:
             'https://images.unsplash.com/photo-1635328372330-757aa2e61d57?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        backgroundColor: color.cardBlue,
+        backgroundColor: color.cardBackgroundBlue,
       ),
     ];
 
     final socialMediaItems = [
-      SocialMediaCardItem(
+      SocialMediaCardData(
         icon: Icons.camera_alt,
-        color: color.socialPink,
+        backgroundColor: color.socialPink,
       ),
-      SocialMediaCardItem(
+      SocialMediaCardData(
         icon: Icons.play_circle_outline,
-        color: color.socialRed,
+        backgroundColor: color.socialRed,
       ),
-      SocialMediaCardItem(
+      SocialMediaCardData(
         icon: Icons.chat_bubble_outline,
-        color: color.socialBlue,
+        backgroundColor: color.socialBlue,
       ),
     ];
 
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(spacing.sm),
-      child: SingleChildScrollView(
-        child: Column(
-          spacing: spacing.sm,
-          children: [
-            HomeDailyChallengeSection(
-              challengeParticipants: challengeParticipants,
-            ),
-            HomeScheduleSection(
-              selectedDate: selectedDate,
-              onDateSelected: (date) => setState(() {
-                selectedDate = date;
-              }),
-            ),
-            HomeWorkoutSection(
-              item: workoutCardItem,
-            ),
-            HomeSocialMediaSection(
-              item: socialMediaItems,
-            ),
-          ],
-        ),
+      child: Column(
+        spacing: spacing.sm,
+        children: [
+          HomeDailyChallengeSection(
+            challengeParticipants: challengeParticipants,
+          ),
+          HomeScheduleSection(
+            selectedDate: selectedDate,
+            onDateSelected: (date) => setState(() {
+              selectedDate = date;
+            }),
+          ),
+          HomeWorkoutSection(
+            workouts: workoutCardItem,
+          ),
+          HomeSocialMediaSection(
+            socials: socialMediaItems,
+          ),
+        ],
       ),
     );
   }

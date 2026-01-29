@@ -7,9 +7,11 @@ class SessionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: SessionHeader(),
-      body: SessionBody(),
+    final color = context.color;
+    return Scaffold(
+      backgroundColor: color.backgroundPrimary,
+      appBar: const SessionHeader(),
+      body: const SessionBody(),
     );
   }
 }
@@ -53,53 +55,51 @@ class SessionBody extends StatelessWidget {
     final color = context.color;
 
     final sessionCardItem = [
-      SessionCardItem(
+      SessionCardData(
         title: 'Yoga Group',
         trainerName: 'Kellie Jetton',
         difficulty: 'Medium',
         duration: '1 hr',
         calories: '115 kcal',
         description: 'Gentle vinvasa flow to improve flexibility and balance',
-        backgroundColor: color.cardYellow,
+        backgroundColor: color.cardBackgroundYellow,
       ),
-      SessionCardItem(
+      SessionCardData(
         title: 'Balance',
         trainerName: 'Kellie Jetton',
         difficulty: 'Easy',
         duration: '30 min',
         calories: '90 kcal',
         description: 'Light session to activate core and stabilizers.',
-        backgroundColor: color.cardBlue,
+        backgroundColor: color.cardBackgroundBlue,
       ),
-      SessionCardItem(
+      SessionCardData(
         title: 'Strength Training',
         trainerName: 'Kellie Jetton',
         difficulty: 'Hard',
         duration: '30 min',
         calories: '250 kcal',
         description: 'Build lean muscle and increase metabolism',
-        backgroundColor: color.cardYellow,
+        backgroundColor: color.cardBackgroundYellow,
       ),
-      SessionCardItem(
+      SessionCardData(
         title: 'Cardio Blast',
         trainerName: 'Kellie Jetton',
         difficulty: 'Medium',
         duration: '45 min',
         calories: '300 kcal',
         description: 'High intensity interval training to boost metabolism',
-        backgroundColor: color.cardBlue,
+        backgroundColor: color.cardBackgroundBlue,
       ),
     ];
 
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(padding.sm),
-      child: SingleChildScrollView(
-        child: Column(
-          spacing: padding.sm,
-          children: [
-            SessionAvailableSection(item: sessionCardItem),
-          ],
-        ),
+      child: Column(
+        spacing: padding.sm,
+        children: [
+          SessionAvailableSection(sessions: sessionCardItem),
+        ],
       ),
     );
   }
