@@ -1,6 +1,7 @@
 import 'package:fitness_tracker_application/appearance/appearance.dart';
 import 'package:fitness_tracker_application/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart' as rive;
 
 class HomeDailyChallengeSection extends StatelessWidget {
   const HomeDailyChallengeSection({
@@ -12,7 +13,6 @@ class HomeDailyChallengeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gradient = context.gradient;
     final spacing = context.spacing;
     final radius = context.radius;
     final color = context.color;
@@ -20,7 +20,7 @@ class HomeDailyChallengeSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(spacing.md),
       decoration: BoxDecoration(
-        gradient: gradient.challengeCard,
+        color: color.backgroundPrimary,
         borderRadius: BorderRadius.circular(radius.md),
         boxShadow: [
           BoxShadow(
@@ -53,6 +53,32 @@ class HomeDailyChallengeSection extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+          ),
+          SizedBox(
+            width: 120,
+            height: 120,
+            child: Center(
+              child: rive.RiveWidgetBuilder(
+                fileLoader: rive.FileLoader.fromAsset(
+                  'assets/animations/sport_winner.riv',
+                  riveFactory: rive.Factory.flutter,
+                ),
+                builder: (BuildContext context, rive.RiveState state) {
+                  return switch (state) {
+                    rive.RiveLoading() => const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+                    rive.RiveLoaded(controller: final controller) =>
+                      rive.RiveWidget(
+                        controller: controller,
+                      ),
+                    rive.RiveFailed() => const Center(
+                      child: Icon(Icons.error_outline, color: Colors.red),
+                    ),
+                  };
+                },
+              ),
             ),
           ),
         ],
