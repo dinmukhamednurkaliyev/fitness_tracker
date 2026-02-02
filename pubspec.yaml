@@ -21,11 +21,13 @@ dependencies:
   rive: ^0.14.1
 
 dev_dependencies:
+  alchemist: ^0.13.0
   bloc_test: ^10.0.0
   flutter_test:
     sdk: flutter
   melos: ^7.3.0
   mocktail: ^1.0.4
+  mocktail_image_network: ^1.2.0
   very_good_analysis: ^10.0.0
 
 flutter:
@@ -79,6 +81,12 @@ melos:
     fix:all:
       run: melos exec -c 10 -- "dart fix --apply"
       description: Apply automatic fixes in all packages.
+    test:golden:
+      run: melos exec -- "flutter test --isGolden=true"
+      description: Run all golden tests in the workspace.
+    test:golden:update:
+      run: melos exec -- "flutter test --update-goldens"
+      description: Update all golden master images.
     quality:check:
       run: |
         melos run format:check
