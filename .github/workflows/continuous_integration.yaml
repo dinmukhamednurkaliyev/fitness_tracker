@@ -23,7 +23,7 @@ jobs:
       flutter: ${{ steps.filter.outputs.flutter }}
     steps:
       - name: "Git: Checkout"
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
 
       - name: "Filter: Detect Changes"
         uses: dorny/paths-filter@v3.0.2
