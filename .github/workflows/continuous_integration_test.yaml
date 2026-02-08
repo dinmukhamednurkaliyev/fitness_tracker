@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: "Git: Checkout"
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
 
       - name: "Flutter: Setup"
         uses: ./.github/actions/flutter_setup/
