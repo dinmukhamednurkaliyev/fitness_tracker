@@ -18,13 +18,14 @@
     }
   ],
   "words": [
-    "flutter",
-    "dart",
     "appbundle",
+    "dart",
+    "flutter",
+    "Gamified",
     "keyhole",
     "linter",
-    "xxxs",
     "vinvasa",
+    "xxxs"
   ],
   "ignorePaths": [
     "*.lock",
