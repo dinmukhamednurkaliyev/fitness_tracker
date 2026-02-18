@@ -85,7 +85,7 @@ graph TD
 
     subgraph Infrastructure [Infrastructure]
         direction LR
-        I1([Bloc]):::tech --- I2([Dio]):::tech --- I3[(Hive)]:::tech --- I4([Router]):::tech --- I5([Lottie]):::tech
+        I1([Bloc]):::technology --- I2([Dio]):::technology --- I3[(Hive)]:::technology --- I4([Router]):::technology --- I5([Rive]):::technology
     end
 
     EntryPoint --> Features
