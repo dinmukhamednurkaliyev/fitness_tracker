@@ -13,13 +13,13 @@ dependencies:
     path: ../core
   flutter:
     sdk: flutter
-  rive: ^0.14.1
+  rive: ^0.14.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4
-  very_good_analysis: ^10.1.0
+  very_good_analysis: ^10.2.0
 
 flutter:
   generate: true
