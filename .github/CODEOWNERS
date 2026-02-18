@@ -1,9 +1,2 @@
 # Global owner
 *       @dinmukhamednurkaliyev
-
-# CI/CD ownership
-.github/  @dinmukhamednurkaliyev
-
-# Flutter specifics
-*.dart        @dinmukhamednurkaliyev
-pubspec.yaml  @dinmukhamednurkaliyev

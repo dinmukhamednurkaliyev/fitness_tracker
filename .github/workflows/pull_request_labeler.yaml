@@ -1,8 +1,11 @@
-name: "Pull Request: Labeler"
+name: "Standard / Labeler"
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened]
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: read
@@ -10,18 +13,14 @@ permissions:
 
 jobs:
   run:
-    name: "Run"
+    name: "Labeler: Run"
     runs-on: ubuntu-latest
     steps:
-      - name: "Git: Checkout"
-        uses: actions/checkout@v6.0.1
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          sparse-checkout: .github/configurations/pull_request_labels.yaml
+      - name: "Repository: Checkout"
+        uses: actions/checkout@v6.0.2
 
-      - name: "Labeler: Triage PR"
+      - name: "Labeler: Sync"
         uses: actions/labeler@v6.0.1
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           sync-labels: true
-          configuration-path: .github/configurations/pull_request_labels.yaml
+          configuration-path: .github/configurations/pull_request_labeler.yaml

@@ -1,94 +1,142 @@
-name: "Continuous Integration: Pipeline"
-
-on:
-  push:
-    branches: [main, release/**]
-  pull_request:
-    branches: [main, release/**]
+name: "Continuous Integration"
 
 permissions:
   contents: read
   pull-requests: write
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  changes:
-    name: "Continuous Integration: Changes"
+  verification-difference:
+    name: "Verification / Difference"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
       flutter: ${{ steps.filter.outputs.flutter }}
+      spell: ${{ steps.filter.outputs.spell }}
     steps:
-      - name: "Git: Checkout"
-        uses: actions/checkout@v6.0.1
+      - name: "Repository: Checkout"
+        uses: actions/checkout@v6.0.2
 
-      - name: "Filter: Detect Changes"
-        uses: dorny/paths-filter@v3.0.2
+      - name: "Verification: Check Flutter"
         id: filter
+        uses: dorny/paths-filter@v3.0.2
         with:
           filters: |
             flutter:
-              - '**/*.dart'
-              - '.github/workflows/*.yaml'
+              - "**/*.dart"
+              - "pubspec.yaml"
+              - ".github/workflows/*.yaml"
+              - ".github/actions/**"
+            spell:
+              - "**/*.{dart,md,txt,yaml,json}"
 
-  lint:
-    name: "Continuous Integration: Lint"
-    needs: changes
-    if: needs.changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/continuous_integration_lint.yaml
-    secrets: inherit
+  quality-flutter:
+    name: "Quality / Flutter"
+    needs: [verification-difference]
+    if: ${{ needs.verification-difference.outputs.flutter == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Repository: Checkout"
+        uses: actions/checkout@v6.0.2
 
-  analyze:
-    name: "Continuous Integration: Analyze"
-    needs: changes
-    if: needs.changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/continuous_integration_analyze.yaml
-    secrets: inherit
+      - name: "Action: Flutter Setup"
+        uses: ./.github/actions/flutter_setup
+        with:
+          version: "3.38.9"
+          channel: "stable"
 
-  test:
-    name: "Continuous Integration: Test"
-    needs: changes
-    if: needs.changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/continuous_integration_test.yaml
-    secrets: inherit
+      - name: "Melos: Bootstrap"
+        run: dart run melos bootstrap
 
-  spellcheck:
-    name: "Continuous Integration: Spell Check"
-    needs: changes
-    if: needs.changes.outputs.flutter == 'true'
-    uses: ./.github/workflows/continuous_integration_spellcheck.yaml
-    secrets: inherit
+      - name: "Flutter: Format Check"
+        run: dart run melos run format
 
-  status:
-    name: "Continuous Integration: Verify"
+      - name: "Flutter: Analyze"
+        run: dart run melos run analyze
+
+      - name: "Flutter: Test"
+        run: dart run melos run test
+
+  standard-semantic-pull-request:
+    name: "Standard / Semantic Pull Request"
+    runs-on: ubuntu-latest
+    needs: [verification-difference]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: "Check Pull Request Title"
+        uses: amannn/action-semantic-pull-request@v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          requireScope: true
+
+  standard-spell-check:
+    name: "Standard / Spell Check"
+    runs-on: ubuntu-latest
+    needs: [verification-difference]
+    if: ${{ needs.verification-difference.outputs.spell == 'true' }}
+    steps:
+      - name: "Repository: Checkout"
+        uses: actions/checkout@v6.0.2
+
+      - name: "Spell Check: Verify Repository"
+        uses: streetsidesoftware/cspell-action@v8.2.0
+        with:
+          files: "**/*.{dart,md,txt,yaml,json}"
+          config: ".cspell.json"
+
+  verification-status:
+    name: "Verification / Status"
     runs-on: ubuntu-latest
     if: always()
-    timeout-minutes: 5
     needs:
-      - changes
-      - lint
-      - analyze
-      - test
-      - spellcheck
-
+      - verification-difference
+      - quality-flutter
+      - standard-semantic-pull-request
+      - standard-spell-check
     steps:
-      - name: "Continuous Integration: Verify Status"
+      - name: "Verification: Result"
+        shell: bash
         run: |
-          RESULTS='${{ toJSON(needs.*.result) }}'
-          echo "Job results: $RESULTS"
+          RED='\033[0;31m'
+          GREEN='\033[0;32m'
+          YELLOW='\033[1;33m'
+          NC='\033[0m'
 
-          if [[ "${{ needs.changes.result }}" == "failure" ]]; then
-            echo "❌ Critical: Change detection failed."
-            exit 1
-          fi
+
+          RESULTS='${{ toJSON(needs) }}'
+
+          echo "::group::Detailed Job Results"
+          echo -e "${YELLOW}Detailed Status:${NC}"
+          echo "$RESULTS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"'
+          echo "::endgroup::"
 
           if echo "$RESULTS" | grep -qE 'failure|cancelled'; then
-            echo "❌ Error: One or more required jobs failed."
+            echo -e "${RED} ERROR: One or more critical checks failed.${NC}"
             exit 1
           fi
 
-          echo "✅ CI Green: All checks passed or were safely skipped."
-          exit 0
+          echo -e "${GREEN} SUCCESS: All checks passed or were safely skipped.${NC}"

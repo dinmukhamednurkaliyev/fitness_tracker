@@ -1,84 +1,37 @@
-name: "Flutter: Setup"
-description:
-  "Smart setup: Checks for Melos, installs Flutter/Melos, and Bootstraps"
+name: "Action: Flutter Setup"
+description: "Setup Flutter environment"
 
 inputs:
-  flutter-version:
-    description: "Version of Flutter"
-    required: false
-    default: "3.38.4"
-  melos-version:
-    description: "Version of Melos"
-    required: false
-    default: "7.3.0"
-  run-bootstrap:
-    description: "Run 'melos bootstrap' automatically?"
-    required: false
-    default: "true"
-  working-directory:
-    description: "Root directory of the app"
-    required: false
-    default: "."
-
-outputs:
-  installed:
-    description:
-      "Returns 'true' if environment was set up, 'false' if skipped (no
-      melos.yaml)"
-    value: ${{ steps.check.outputs.exists }}
+  version:
+    description: "Flutter version"
+    required: true
+  channel:
+    description: "Flutter channel"
+    default: "stable"
 
 runs:
   using: composite
   steps:
-    - name: "Filter: Check Melos"
-      id: check
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
-        if [ -f "melos.yaml" ]; then
-          echo "exists=true" >> $GITHUB_OUTPUT
-          echo "✅ Melos project found."
-        else
-          echo "exists=false" >> $GITHUB_OUTPUT
-          echo "⚠️ melos.yaml not found. Skipping setup."
-        fi
-
     - name: "Flutter: Install"
-      if: steps.check.outputs.exists == 'true'
       uses: subosito/flutter-action@v2.21.0
       with:
-        channel: stable
-        flutter-version: ${{ inputs.flutter-version }}
+        flutter-version: ${{ inputs.version }}
+        channel: ${{ inputs.channel }}
         cache: true
-        cache-key: flutter-${{ runner.os }}-${{ inputs.flutter-version }}
 
-    - name: "Pub: Activate Melos"
-      if: steps.check.outputs.exists == 'true'
-      shell: bash
-      run: |
-
-        echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-
-        if ! command -v melos &> /dev/null; then
-          echo "Installing Melos ${{ inputs.melos-version }}..."
-          flutter pub global activate melos ${{ inputs.melos-version }}
-        else
-          echo "Melos already installed."
-        fi
-
-    - name: "Cache: Pub Assets"
-      if: steps.check.outputs.exists == 'true'
-      uses: actions/cache@v5.0.1
+    - name: "Pub: Cache Dependencies"
+      uses: actions/cache@v5.0.3
       with:
         path: |
-          ~/.pub-cache/hosted
-          ~/.pub-cache/git
-        key: os-${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          ${{ env.FLUTTER_HOME }}/.pub-cache
+          ~/.pub-cache
+        key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
         restore-keys: |
-          os-${{ runner.os }}-pub-
+          ${{ runner.os }}-pub-
 
-    - name: "Melos: Bootstrap"
-      if: steps.check.outputs.exists == 'true' && inputs.run-bootstrap == 'true'
+    - name: "Pub: Get Packages"
       shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: melos bootstrap
+      run: |
+        echo "::group::Get Packages"
+        flutter pub get
+        echo "::endgroup::"

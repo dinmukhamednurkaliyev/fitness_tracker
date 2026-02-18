@@ -1,15 +1,15 @@
 name-template: "v$RESOLVED_VERSION "
 tag-template: "v$RESOLVED_VERSION"
 categories:
-  - title: "🚀 New Features"
+  - title: "New Features"
     labels:
       - "type/feature"
       - "semver/minor"
-  - title: "🐛 Bug Fixes"
+  - title: "Bug Fixes"
     labels:
       - "type/bug"
       - "semver/patch"
-  - title: "🧰 Maintenance"
+  - title: "Maintenance"
     labels:
       - "type/chore"
       - "area/ci"

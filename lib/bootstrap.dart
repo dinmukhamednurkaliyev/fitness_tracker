@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class ApplicationBlocObserver extends BlocObserver {
   const ApplicationBlocObserver();

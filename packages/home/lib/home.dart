@@ -1,0 +1,11 @@
+export 'src/controllers/home_controller.dart';
+export 'src/pages/home_page.dart';
+export 'src/sections/home_daily_challenge_section.dart';
+export 'src/sections/home_schedule_section.dart';
+export 'src/sections/home_social_media_section.dart';
+export 'src/sections/home_workout_section.dart';
+export 'src/widgets/search_button.dart';
+export 'src/widgets/social_media_card.dart';
+export 'src/widgets/social_media_icon.dart';
+export 'src/widgets/user_greeting.dart';
+export 'src/widgets/workout_card.dart';

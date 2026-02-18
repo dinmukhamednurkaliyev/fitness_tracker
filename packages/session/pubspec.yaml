@@ -1,0 +1,28 @@
+name: session
+description: Session package for fitness tracker application.
+version: 0.1.0+1
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.10.8
+  flutter: ^3.38.9
+
+dependencies:
+  appearance:
+    path: ../appearance
+  core:
+    path: ../core
+  flutter:
+    sdk: flutter
+  localization:
+    path: ../localization
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^10.1.0
+
+flutter:
+  generate: true

@@ -1,0 +1,32 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "dictionaries": [
+    "vgv_allowed",
+    "vgv_forbidden"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "vgv_allowed",
+      "path": "https://raw.githubusercontent.com/verygoodopensource/very_good_dictionaries/main/allowed.txt",
+      "description": "Allowed VGV Spellings"
+    },
+    {
+      "name": "vgv_forbidden",
+      "path": "https://raw.githubusercontent.com/verygoodopensource/very_good_dictionaries/main/forbidden.txt",
+      "description": "Forbidden VGV Spellings"
+    }
+  ],
+  "words": [
+    "flutter",
+    "dart",
+    "appbundle",
+    "keyhole",
+    "linter"
+  ],
+  "ignorePaths": [
+    "*.lock",
+    "dist/**",
+    ".git/**"
+  ]
+}

@@ -1,34 +1,43 @@
-name: fitness_tracker_application
+name: fitness_tracker
 description: A Very Good Project created by Very Good CLI.
 version: 1.0.0+1
 publish_to: none
 
+workspace:
+  - packages/core
+  - packages/appearance
+  - packages/localization
+  - packages/home
+  - packages/profile
+  - packages/session
+
 environment:
-  sdk: ^3.10.0
-  flutter: ^3.38.0
+  sdk: ^3.10.8
+  flutter: ^3.38.9
 
 dependencies:
-  bloc: ^9.2.0
+  appearance:
+    path: packages/appearance
+  core:
+    path: packages/core
   flutter:
     sdk: flutter
-  flutter_bloc: ^9.1.1
-  flutter_localizations:
-    sdk: flutter
-  go_router: ^17.0.1
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  intl: ^0.20.2
-  rive: ^0.14.1
+  home:
+    path: packages/home
+  profile:
+    path: packages/profile
+  session:
+    path: packages/session
 
 dev_dependencies:
   alchemist: ^0.13.0
   bloc_test: ^10.0.0
   flutter_test:
     sdk: flutter
-  melos: ^7.3.0
+  melos: ^7.4.0
   mocktail: ^1.0.4
   mocktail_image_network: ^1.2.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.1.0
 
 flutter:
   generate: true
@@ -39,62 +48,23 @@ flutter:
     - assets/animations/
 
 melos:
-  packages:
-    - packages/**
-
   scripts:
-    prepare:all:
-      run: |
-        melos clean:all
-        melos bootstrap
-      description: Clean and bootstrap all packages.
-    analyze:all:
-      run: melos exec -c 8 -- "dart analyze . --fatal-infos --fatal-warnings"
-      description: Run static analysis across the entire repository.
-    test:unit:
-      run: melos exec -c 8 --dir-exists="test" -- "flutter test"
-      description: Run unit tests in packages that have a 'test' directory.
-    test:coverage:
-      run: melos exec -c 10 -- "flutter test --coverage"
-      description: Run unit tests with coverage in all packages.
-    build:run:
-      run:
-        melos exec -c 8 --depends-on="build_runner" -- "flutter pub run build_runner build
-        --delete-conflicting-outputs"
-      description:
-        Run code generation (Freezed, JSON Serializable) only for packages that depend on
-        build_runner.
-    build:watch:
-      run: melos exec -c 8 --depends-on="build_runner" -- "flutter pub run build_runner watch"
-      description:
-        Run code generation (Freezed, JSON Serializable) only for packages that depend on
-        build_runner.
-    format:all:
-      run: melos exec -c 10 -- "dart format ."
-      description: Run code formatting across the entire repository.
-    format:check:
-      run: melos exec -c 10 -- "dart format . --line-length 80 --set-exit-code"
-      description: Check if code formatting is correct across the entire repository.
-    clean:all:
-      run: melos exec -c 10 -- "flutter clean"
-      description: Clean all packages.
-    fix:all:
-      run: melos exec -c 10 -- "dart fix --apply"
-      description: Apply automatic fixes in all packages.
-    test:golden:
-      run: melos exec -- "flutter test --isGolden=true"
-      description: Run all golden tests in the workspace.
-    test:golden:update:
-      run: melos exec -- "flutter test --update-goldens"
-      description: Update all golden master images.
-    quality:check:
-      run: |
-        melos run format:check
-        melos run analyze:all
-        melos run test:unit
-      description: Run all quality checks (format, analyze, test).
-    rebuild:all:
-      run: |
-        melos run clean:all
-        melos run prepare:all
-      description: Rebuild all packages.
+    analyze:
+      run: melos exec -- flutter analyze
+      description: Run flutter analyze for all packages.
+
+    format:
+      run: melos exec -- dart format .
+      description: Run dart format for all packages.
+
+    test:
+      run: melos exec -- flutter test
+      description: Run flutter test for all packages.
+
+    clean:
+      run: melos exec -- flutter clean
+      description: Run flutter clean in all packages.
+
+    get:
+      run: melos bootstrap
+      description: Install dependencies for all packages.
