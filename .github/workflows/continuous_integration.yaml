@@ -53,8 +53,9 @@ jobs:
       - name: "Action: Flutter Setup"
         uses: ./.github/actions/flutter_setup
         with:
-          version: "3.38.9"
-          channel: "stable"
+          flutter-version: "3.38.9"
+          flutter-channel: "stable"
+          melos-version: "7.4.0"
 
       - name: "Melos: Bootstrap"
         run: dart run melos bootstrap

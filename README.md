@@ -85,7 +85,7 @@ graph TD
 
     subgraph Infrastructure [Infrastructure]
         direction LR
-        I1([Bloc]):::tech --- I2([Dio]):::tech --- I3[(Hive)]:::tech --- I4([Router]):::tech --- I5([Lottie]):::tech
+        I1([Bloc]):::technology --- I2([Dio]):::technology --- I3[(Hive)]:::technology --- I4([Router]):::technology --- I5([Rive]):::technology
     end
 
     EntryPoint --> Features
@@ -102,7 +102,7 @@ Instead of a standard monolithic "lib" folder, this project uses a **Multi-Packa
 
 ### Multi-Package Structure
 - **Core Package (`packages/core`)**: The backbone of the app. It acts as a **Single Source of Truth** for strict dependencies (Bloc, Dio, Hive, GoRouter) using Barrel files (`export`). It also contains shared entities and utilities.
-- **Appearance Package (`packages/appearance`)**: A dedicated Design System module. It houses all atomic design tokens (Colors, Typography, Spacing) and assets (Rive animations). It exposes `context` extensions for typesafe UI development.
+- **Appearance Package (`packages/appearance`)**: A dedicated Design System module. It houses all atomic design tokens (Colors, Typography, Spacing) and assets (Rive animations). It exposes `context` extensions for type safe UI development.
 - **Feature Modules (`packages/home`, `profile`, etc.)**: Encapsulated business logic and UI. Features are horizontal slices that never depend on each other directly, only on the Core or Shared UI kit.
 
 ### Key Technical Decisions
@@ -119,7 +119,7 @@ Instead of a standard monolithic "lib" folder, this project uses a **Multi-Packa
 | :--- | :--- |
 | **Dependency Hell** | Centralized exports in `core` package, ensuring version consistency across all modules. |
 | **Code Readability** | Implemented **Context Extensions** for the Design System, allowing `context.layout.button` syntax. |
-| **Navigation State** | Utilised `StatefulShellRoute` to preserve the state of complex flows within each tab. |
+| **Navigation State** | Utilized `StatefulShellRoute` to preserve the state of complex flows within each tab. |
 
 
 ## Getting Started
