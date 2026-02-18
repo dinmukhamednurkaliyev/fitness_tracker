@@ -46,4 +46,4 @@ runs:
         dart pub global activate melos ${{ inputs.melos-version }}
 
         echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
-        echo "::endgroup:
+        echo "::endgroup::"
