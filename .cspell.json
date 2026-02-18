@@ -22,7 +22,9 @@
     "dart",
     "appbundle",
     "keyhole",
-    "linter"
+    "linter",
+    "xxxs",
+    "vinvasa",
   ],
   "ignorePaths": [
     "*.lock",
