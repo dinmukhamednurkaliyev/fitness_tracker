@@ -65,7 +65,6 @@ It demonstrates professional-grade standards including:
 
 ```mermaid
 graph TD
-    %% Modern Compact Styles
     classDef app fill:#eef2ff,stroke:#4338ca,stroke-width:1px,color:#4338ca;
     classDef feature fill:#ffffff,stroke:#94a3b8,stroke-width:1px,color:#475569,stroke-dasharray: 5 5;
     classDef pkg fill:#f8fafc,stroke:#1e293b,stroke-width:1px,color:#1e293b;
